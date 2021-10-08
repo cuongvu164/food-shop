@@ -7,6 +7,7 @@ import Intro from './Intro/Intro'
 import TabNav from './TabNav/TabNav'
 import BannerImage from './Banner/BannerImage'
 import ScrollToTop from './ScrollToTop/ScrollToTop'
+import IntroYourself from './Intro/IntroYourself'
 
 const Components = () => {
   return (
@@ -21,6 +22,7 @@ const Components = () => {
             <Intro />
             <TabNav />
             <BannerImage />
+            <IntroYourself/>
           </div>
           <Footer />
           {/* </header> */}
