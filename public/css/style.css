@@ -1287,6 +1287,7 @@ input {
 
 .d-flex {
     display: flex !important;
+    align-items: center;
 }
 
 [class~=owl-theme] [class~=owl-dots] [class~=owl-dot] span {
