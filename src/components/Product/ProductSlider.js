@@ -55,7 +55,7 @@ const ProductSlider = () => {
                 <div className="product-item">
                   <div className="product-image">
                     <a href="product-detail-left-sidebar.html">
-                      <img src="img/product/8.jpg" alt="Product Image" style={{ display: "block", width: "100%" }} />
+                      <img src="img/product/8.jpg" alt="Product_Image" style={{ display: "block", width: "100%" }} />
                     </a>
                   </div>
                   <div className="product-title">
@@ -74,10 +74,10 @@ const ProductSlider = () => {
                     <span className="sale-price">$120.00</span>
                   </div>
                   <div className="product-buttons">
-                    <a className="add-to-cart" href="#">
+                    <a className="add-to-cart" href="/">
                       <i className="fa fa-shopping-basket" aria-hidden="true" />
                     </a>
-                    <a className="quickview" href="#">
+                    <a className="quickview" href="/">
                       <i className="fa fa-eye" aria-hidden="true" />
                     </a>
                   </div>
