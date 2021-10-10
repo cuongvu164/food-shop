@@ -6,13 +6,11 @@ import Footer from './Footer/Footer'
 import Intro from './Intro/Intro'
 import TabNav from './TabNav/TabNav'
 import BannerImage from './Banner/BannerImage'
-import ScrollToTop from './ScrollToTop/ScrollToTop'
 import IntroYourself from './Intro/IntroYourself'
 
 const Components = () => {
   return (
     <>
-      <ScrollToTop/>
         <div id="all">
           {/* <header id="header"> */}
           <Header />
@@ -27,7 +25,7 @@ const Components = () => {
           <Footer />
           {/* </header> */}
 
-        </div>
+       </div>
     </>
   );
 };

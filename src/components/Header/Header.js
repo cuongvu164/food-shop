@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 
 const Header = () => {
   return (
@@ -18,14 +19,14 @@ const Header = () => {
             {/* Logo */}
             <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
               <div className="logo">
-                <a href="index.html">
+                <Link to="/">
                   <img className="img-responsive" src="img/logo.png" alt="Logo" />
-                </a>
+                </Link>
               </div>
               <span id="toggle-mobile-menu"><i className="zmdi zmdi-menu" /></span>
             </div>
             {/* Cart */}
-            <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12">
               <div className="block-cart dropdown">
                 <div className="cart-title">
                   <i className="fa fa-shopping-basket" />
@@ -37,42 +38,42 @@ const Header = () => {
                       <tbody>
                         <tr>
                           <td className="product-image">
-                            <a href="/">
+                            <Link to="/">
                               <img src="img/product/7.jpg" alt="Product" />
-                            </a>
+                            </Link>
                           </td>
                           <td>
                             <div className="product-name">
-                              <a href="product-detail-left-sidebar.html">Organic Strawberry Fruits</a>
+                              <Link to="product-detail-left-sidebar.html">Organic Strawberry Fruits</Link>
                             </div>
                             <div>
                               2 x <span className="product-price">$28.98</span>
                             </div>
                           </td>
                           <td className="action">
-                            <a className="remove" href="/">
+                            <Link className="remove" to="/">
                               <i className="fa fa-trash-o" aria-hidden="true" />
-                            </a>
+                            </Link>
                           </td>
                         </tr>
                         <tr>
                           <td className="product-image">
-                            <a href="product-detail-left-sidebar.html">
+                            <Link to="product-detail-left-sidebar.html">
                               <img src="img/product/6.jpg" alt="Product" />
-                            </a>
+                            </Link>
                           </td>
                           <td>
                             <div className="product-name">
-                              <a href="product-detail-left-sidebar.html">Organic Strawberry</a>
+                              <Link to="product-detail-left-sidebar.html">Organic Strawberry</Link>
                             </div>
                             <div>
                               1 x <span className="product-price">$35.00</span>
                             </div>
                           </td>
                           <td className="action">
-                            <a className="remove" href="/">
+                            <Link className="remove" to="/">
                               <i className="fa fa-trash-o" aria-hidden="true" />
-                            </a>
+                            </Link>
                           </td>
                         </tr>
                         <tr className="total">
@@ -82,8 +83,8 @@ const Header = () => {
                         <tr>
                           <td colSpan={3}>
                             <div className="cart-button">
-                              <a className="btn btn-primary" href="product-cart.html" title="View Cart">View Cart</a>
-                              <a className="btn btn-primary" href="product-checkout.html" title="Checkout">Checkout</a>
+                              <Link className="btn btn-primary" to="product-cart.html" title="View Cart">View Cart</Link>
+                              <Link className="btn btn-primary" to="product-checkout.html" title="Checkout">Checkout</Link>
                             </div>
                           </td>
                         </tr>
@@ -93,6 +94,27 @@ const Header = () => {
                 </div>
               </div>
             </div>
+            <div className="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+              <div className="my-account dropdown toggle-icon">
+                <div className="dropdown-toggle" data-toggle="dropdown">
+                  <i className="zmdi zmdi-menu" style={{ fontSize: '40px' }} />
+                </div>
+                <div className="dropdown-menu" style={{ zIndex: 999 }}>
+                  <div className="item">
+                    <Link to="/profile" title="Log in to your customer account"><i className="fa fa-cog" />My Account</Link>
+                  </div>
+                  <div className="item">
+                    <Link to="/login" title="Log in to your customer account"><i className="fa fa-sign-in" />Login</Link>
+                  </div>
+                  <div className="item">
+                    <Link to="/register" title="Register Account"><i className="fa fa-user" />Register</Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
           </div>
         </div>
       </div>
