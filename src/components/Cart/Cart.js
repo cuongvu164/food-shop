@@ -1,5 +1,6 @@
 import React from 'react';
 import './cart.scss'
+import { Link } from 'react-router-dom'
 
 const Cart = () => {
   return (
@@ -21,15 +22,13 @@ const Cart = () => {
               <tbody>
                 <tr>
                   <td className="product-remove">
-                      <i className="fa fa-times"/>
+                    <i className="fa fa-times" />
                   </td>
                   <td>
-                    <a href="product-detail-left-sidebar.html">
                       <img width={80} alt="Product_Image" className="img-responsive" src="img/product/19.jpg" />
-                    </a>
                   </td>
                   <td>
-                    <a href="product-detail-left-sidebar.html" className="product-name">Organic Strawberry Fruits</a>
+                    <p className="product-name">Organic Strawberry Fruits</p>
                   </td>
                   <td className="text-center">
                     $265
@@ -58,9 +57,7 @@ const Cart = () => {
                     </a>
                   </td>
                   <td>
-                    <a href="product-detail-left-sidebar.html">
                       <img width={80} alt="Product_Image" className="img-responsive" src="img/product/31.jpg" />
-                    </a>
                   </td>
                   <td>
                     <a href="product-detail-left-sidebar.html" className="product-name">Organic Strawberry Fruits</a>
@@ -104,10 +101,10 @@ const Cart = () => {
             </table>
           </div>
           <div className="checkout-btn">
-            <a href="product-checkout.html" className="btn btn-primary pull-right" title="Proceed to checkout">
+            <Link to="/checkout" className="btn btn-primary pull-right" title="Proceed to checkout">
               <span>Proceed to checkout</span>
               <i className="fa fa-angle-right ml-xs" />
-            </a>
+            </Link>
           </div>
         </div>
       </div>
