@@ -1,0 +1,12 @@
+.cart-summary {
+    tbody {
+        .product-remove {
+            i {
+                cursor: pointer;
+                &:hover {
+                    color: #78b144;
+                }
+            }
+        }
+    }
+}

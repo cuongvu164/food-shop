@@ -6,7 +6,7 @@ import Product from '../../components/Product/Product'
 const ProductPage = () => {
   return (
     <>
-      <Banner />
+      <Banner title="Product"/>
       <div className="container">
         <div className="row">
           <SideBar/>

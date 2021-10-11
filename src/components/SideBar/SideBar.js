@@ -15,7 +15,7 @@ const SideBar = () => {
                 <i className="zmdi zmdi-plus" />
               </span>
               <Link className="category-title" to="product-grid-left-sidebar.html">Vegetables</Link>
-              <div className="sub-category collapse" id="vegetables" aria-expanded="true" role="main">
+              <div className="sub-category collapse" id="vegetables" role="main">
                 <div className="item">
                   <Link to="product-grid-left-sidebar.html">Tomato</Link>
                 </div>
@@ -36,7 +36,7 @@ const SideBar = () => {
                 <i className="zmdi zmdi-plus" />
               </span>
               <Link className="category-title" to="product-grid-left-sidebar.html">Fruits</Link>
-              <div className="sub-category collapse" id="fruits" aria-expanded="true" role="main">
+              <div className="sub-category collapse" id="fruits" role="main">
                 <div className="item">
                   <Link to="product-grid-left-sidebar.html">Orange</Link>
                 </div>
@@ -57,7 +57,7 @@ const SideBar = () => {
                 <i className="zmdi zmdi-plus" />
               </span>
               <Link className="category-title" to="product-grid-left-sidebar.html">Juices</Link>
-              <div className="sub-category collapse" id="juices" aria-expanded="true" role="main">
+              <div className="sub-category collapse" id="juices"role="main">
                 <div className="item">
                   <Link to="product-grid-left-sidebar.html">Orange Juices</Link>
                 </div>

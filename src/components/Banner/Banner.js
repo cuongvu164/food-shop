@@ -1,14 +1,15 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
 
-const Banner = () => {
+const Banner = (props) => {
   return (
     <>
       <div id="breadcrumb">
         <div className="container">
-          <h2 className="title">Our Blog</h2>
+          <h2 className="title">{props.title}</h2>
           <ul className="breadcrumb">
-            <li><a href="/" title="Home">Home</a></li>
-            <li><span>Our Blog</span></li>
+            <li><Link to="/" title="Home">Home</Link></li>
+            <li><span>{props.title}</span></li>
           </ul>
         </div>
       </div>

@@ -29,8 +29,11 @@ const Header = () => {
             <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12">
               <div className="block-cart dropdown">
                 <div className="cart-title">
-                  <i className="fa fa-shopping-basket" />
-                  <span className="cart-count">2</span>
+                  <Link to="/cart">
+                    <i className="fa fa-shopping-basket" />
+                    <span className="cart-count">2</span>
+                  </Link>
+
                 </div>
                 <div className="dropdown-content">
                   <div className="cart-content">
