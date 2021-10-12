@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 const NotFound = () => {
   return (
     <>
-      <div id="content" class="site-content page-404">
+      <div id="content" className="site-content page-404">
         <div className="container">
           <div className="row">
             <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12 page-left">

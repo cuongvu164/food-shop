@@ -108,7 +108,7 @@ const Footer = () => {
                     <h2 className="block-title">Follow Us</h2>
                     <div className="block-content">
                       <ul>
-                        <li><a href="/"><i className="zmdi zmdi-facebook" /></a></li>
+                        <li><a href="https://www.facebook.com/ariescuong20/"><i className="zmdi zmdi-facebook" /></a></li>
                         <li><a href="/"><i className="zmdi zmdi-twitter" /></a></li>
                         <li><a href="/"><i className="zmdi zmdi-dribbble" /></a></li>
                         <li><a href="/"><i className="zmdi zmdi-instagram" /></a></li>
