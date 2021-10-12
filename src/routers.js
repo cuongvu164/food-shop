@@ -7,6 +7,7 @@ const NotFoundPage = lazy(() => import('./pages/NotFoundPage/NotFoundPage'));
 const CheckoutPage = lazy(() => import('./pages/CheckoutPage/CheckoutPage'));
 const SignInPage = lazy(() => import('./pages/SignInPage/SignInPage'));
 const SignUpPage = lazy(() => import('./pages/SignUpPage/SignUpPage'));
+const ProductDetailPage = lazy(() => import('./pages/ProductPage/ProductDetailPage'));
 
 export const routers = [
   { path: '/', exact: true, Component: HomePage },
@@ -16,4 +17,5 @@ export const routers = [
   { path: '/register', exact: true, Component: SignUpPage },
   { path: '/checkout', exact: true, Component: CheckoutPage },
   { path: '*', exact: true, Component: NotFoundPage },
+  { path: '/detail', exact: true, Component: ProductDetailPage },
 ]

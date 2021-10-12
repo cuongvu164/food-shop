@@ -83,14 +83,6 @@ const Header = () => {
                           <td>Total:</td>
                           <td colSpan={2}>$92.96</td>
                         </tr>
-                        <tr>
-                          <td colSpan={3}>
-                            <div className="cart-button">
-                              <Link className="btn btn-primary" to="product-cart.html" title="View Cart">View Cart</Link>
-                              <Link className="btn btn-primary" to="product-checkout.html" title="Checkout">Checkout</Link>
-                            </div>
-                          </td>
-                        </tr>
                       </tbody>
                     </table>
                   </div>
