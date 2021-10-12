@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const ProductDetail = () => {
+  const [activeImage, setActiveImage] = useState('img/product/2.jpg')
+
+  const chooseImage = (e) => {
+    setActiveImage(e.target.getAttribute('src'))
+  }
   return (
     <>
       <div className="container">
@@ -14,13 +19,13 @@ const ProductDetail = () => {
                 <div className="product-left col-md-5 col-sm-5 col-xs-12">
                   <div className="product-image vertical">
                     <div className="main-image">
-                      <img className="img-responsive" src="img/product/2.jpg" alt="Product_Image" />
+                      <img className="img-responsive" src={activeImage} alt="Product_Image" />
                     </div>
                     <div className="thumb-images">
-                      <img className="img-responsive" src="img/product/33.jpg" alt="Product_Image" />
-                      <img className="img-responsive" src="img/product/3.jpg" alt="Product_Image" />
-                      <img className="img-responsive" src="img/product/7.jpg" alt="Product_Image" />
-                      <img className="img-responsive" src="img/product/30.jpg" alt="Product_Image" />
+                      <img className="img-responsive" src="img/product/33.jpg" alt="Product_Image" onClick={(e) => chooseImage(e)}/>
+                      <img className="img-responsive" src="img/product/3.jpg" alt="Product_Image" onClick={(e) => chooseImage(e)}/>
+                      <img className="img-responsive" src="img/product/7.jpg" alt="Product_Image" onClick={(e) => chooseImage(e)}/>
+                      <img className="img-responsive" src="img/product/30.jpg" alt="Product_Image" onClick={(e) => chooseImage(e)}/>
                     </div>
                   </div>
                 </div>
