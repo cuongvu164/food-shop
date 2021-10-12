@@ -16,6 +16,6 @@ export const routers = [
   { path: '/login', exact: true, Component: SignInPage },
   { path: '/register', exact: true, Component: SignUpPage },
   { path: '/checkout', exact: true, Component: CheckoutPage },
-  { path: '*', exact: true, Component: NotFoundPage },
   { path: '/detail', exact: true, Component: ProductDetailPage },
+  { path: '*', exact: true, Component: NotFoundPage },
 ]
