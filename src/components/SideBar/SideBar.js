@@ -14,19 +14,19 @@ const SideBar = () => {
                 <i className="zmdi zmdi-minus" />
                 <i className="zmdi zmdi-plus" />
               </span>
-              <Link className="category-title" to="product-grid-left-sidebar.html">Vegetables</Link>
+              <Link className="category-title" to="/">Vegetables</Link>
               <div className="sub-category collapse" id="vegetables" role="main">
                 <div className="item">
-                  <Link to="product-grid-left-sidebar.html">Tomato</Link>
+                  <Link to="/">Tomato</Link>
                 </div>
                 <div className="item">
-                  <Link to="product-grid-left-sidebar.html">Broccoli</Link>
+                  <Link to="/">Broccoli</Link>
                 </div>
                 <div className="item">
-                  <Link to="product-grid-left-sidebar.html">Cabbage</Link>
+                  <Link to="/">Cabbage</Link>
                 </div>
                 <div className="item">
-                  <Link to="product-grid-left-sidebar.html">Cucumber</Link>
+                  <Link to="/">Cucumber</Link>
                 </div>
               </div>
             </div>
@@ -35,19 +35,19 @@ const SideBar = () => {
                 <i className="zmdi zmdi-minus" />
                 <i className="zmdi zmdi-plus" />
               </span>
-              <Link className="category-title" to="product-grid-left-sidebar.html">Fruits</Link>
+              <Link className="category-title" to="/">Fruits</Link>
               <div className="sub-category collapse" id="fruits" role="main">
                 <div className="item">
-                  <Link to="product-grid-left-sidebar.html">Orange</Link>
+                  <Link to="/">Orange</Link>
                 </div>
                 <div className="item">
-                  <Link to="product-grid-left-sidebar.html">Apple</Link>
+                  <Link to="/">Apple</Link>
                 </div>
                 <div className="item">
-                  <Link to="product-grid-left-sidebar.html">Banana</Link>
+                  <Link to="/">Banana</Link>
                 </div>
                 <div className="item">
-                  <Link to="product-grid-left-sidebar.html">Strawberry</Link>
+                  <Link to="/">Strawberry</Link>
                 </div>
               </div>
             </div>
@@ -56,33 +56,33 @@ const SideBar = () => {
                 <i className="zmdi zmdi-minus" />
                 <i className="zmdi zmdi-plus" />
               </span>
-              <Link className="category-title" to="product-grid-left-sidebar.html">Juices</Link>
+              <Link className="category-title" to="/">Juices</Link>
               <div className="sub-category collapse" id="juices"role="main">
                 <div className="item">
-                  <Link to="product-grid-left-sidebar.html">Orange Juices</Link>
+                  <Link to="/">Orange Juices</Link>
                 </div>
                 <div className="item">
-                  <Link to="product-grid-left-sidebar.html">Tomato Juices</Link>
+                  <Link to="/">Tomato Juices</Link>
                 </div>
                 <div className="item">
-                  <Link to="product-grid-left-sidebar.html">Apple Juices</Link>
+                  <Link to="/">Apple Juices</Link>
                 </div>
                 <div className="item">
-                  <Link to="product-grid-left-sidebar.html">Peaches Juices</Link>
+                  <Link to="/">Peaches Juices</Link>
                 </div>
               </div>
             </div>
             <div className="item">
-              <Link className="category-title" to="product-grid-left-sidebar.html">Tea and Coffee</Link>
+              <Link className="category-title" to="/">Tea and Coffee</Link>
             </div>
             <div className="item">
-              <Link className="category-title" to="product-grid-left-sidebar.html">Jam</Link>
+              <Link className="category-title" to="/">Jam</Link>
             </div>
             <div className="item">
-              <Link className="category-title" to="product-grid-left-sidebar.html">SeaFood</Link>
+              <Link className="category-title" to="/">SeaFood</Link>
             </div>
             <div className="item">
-              <Link className="category-title" to="product-grid-left-sidebar.html">Fresh Meats</Link>
+              <Link className="category-title" to="/">Fresh Meats</Link>
             </div>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import ProductSlider from '../Product/ProductSlider'
 
 const TabNav = () => {
@@ -13,47 +14,47 @@ const TabNav = () => {
           <div className="tab-nav">
             <ul>
               <li className="active">
-                <a data-toggle="tab" href="#all-products">
+                <Link data-toggle="tab" to="#all-products">
                   <img src="img/product/product-category-0.png" alt="All Product" />
                   <span>All Products</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a data-toggle="tab" href="#vegetables">
+                <Link data-toggle="tab" to="#vegetables">
                   <img src="img/product/product-category-1.png" alt="Vegetables" />
                   <span>Vegetables</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a data-toggle="tab" href="#fruits">
+                <Link data-toggle="tab" to="#fruits">
                   <img src="img/product/product-category-2.png" alt="Fruits" />
                   <span>Fruits</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a data-toggle="tab" href="#bread">
+                <Link data-toggle="tab" to="#bread">
                   <img src="img/product/product-category-3.png" alt="Bread" />
                   <span>Bread</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a data-toggle="tab" href="#juices">
+                <Link data-toggle="tab" to="#juices">
                   <img src="img/product/product-category-4.png" alt="Juices" />
                   <span>Juices</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a data-toggle="tab" href="#tea">
+                <Link data-toggle="tab" to="#tea">
                   <img src="img/product/product-category-5.png" alt="Tea" />
                   <span>Tea</span>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
         </div>
 
         {/* Product */}
-        <ProductSlider/>
+        <ProductSlider />
       </div>
 
     </>

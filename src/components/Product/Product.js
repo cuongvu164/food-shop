@@ -23,7 +23,6 @@ const Product = () => {
       name: 'Organic Strawberry Fruits',
       image: 'img/product/4.jpg',
       salePrice: '$80.00',
-      basePrice: '$90.00',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien urna, commodo ut molestie vitae, feugiat tincidunt ligula...',
       stock: 'In stock'
     },
@@ -115,13 +114,10 @@ const Product = () => {
                               <span className="base-price">{item.basePrice ? item.basePrice : ''}</span>
                             </div>
                             <div className="product-buttons">
-                              <Link className="add-to-cart" to="#">
+                              <Link className="add-to-cart">
                                 <i className="fa fa-shopping-basket" aria-hidden="true" />
                               </Link>
-                              <Link className="add-wishlist" to="#">
-                                <i className="fa fa-heart" aria-hidden="true" />
-                              </Link>
-                              <Link className="quickview" to="#">
+                              <Link className="quickview" to="/">
                                 <i className="fa fa-eye" aria-hidden="true" />
                               </Link>
                             </div>
