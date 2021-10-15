@@ -1,4 +1,4 @@
-export const API_URL = "http://localhost:8000/api/"
+export const API_URL = "http://localhost:8000/api"
 
 export const GET_ALL_PRODUCT = "GET_ALL_PRODUCT"
 export const GET_ALL_CATEGORY = "GET_ALL_CATEGORY"

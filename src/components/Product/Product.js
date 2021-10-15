@@ -1,40 +1,20 @@
-import React from 'react';
-import {Link} from 'react-router-dom'
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux';
+import { getProductResult } from '../../redux/actions/product'
 
 const Product = () => {
-  const product = [
-    {
-      name: 'Organic Strawberry Fruits',
-      image: 'img/product/4.jpg',
-      salePrice: '$80.00',
-      basePrice: '$90.00',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien urna, commodo ut molestie vitae, feugiat tincidunt ligula...',
-      stock: 'In stock'
-    },
-    {
-      name: 'Organic Strawberry Fruits',
-      image: 'img/product/4.jpg',
-      salePrice: '$80.00',
-      basePrice: '$90.00',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien urna, commodo ut molestie vitae, feugiat tincidunt ligula...',
-      stock: 'In stock'
-    },
-    {
-      name: 'Organic Strawberry Fruits',
-      image: 'img/product/4.jpg',
-      salePrice: '$80.00',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien urna, commodo ut molestie vitae, feugiat tincidunt ligula...',
-      stock: 'In stock'
-    },
-    {
-      name: 'Organic Strawberry Fruits',
-      image: 'img/product/4.jpg',
-      salePrice: '$80.00',
-      basePrice: '$90.00',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien urna, commodo ut molestie vitae, feugiat tincidunt ligula...',
-      stock: 'In stock'
-    }
-  ]
+  const dispatch = useDispatch()
+  const listProduct = useSelector(state => state.product.products)
+  console.log('listProduct------',listProduct.data)
+  const convertMoney = number => {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+  }
+  
+  useEffect(() => {
+    dispatch(getProductResult())
+  },[])
+
   return (
     <>
       <div id="center-column" className="col-lg-9 col-md-9 col-sm-9 col-xs-12">
@@ -88,18 +68,18 @@ const Product = () => {
               <div className="products-block">
                 <div className="row">
                   {
-                    product.map((item, index) => {
+                    listProduct.data?.map((item, index) => {
                       return (
                         <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12" key={index}>
                           <div className="product-item">
                             <div className="product-image">
-                              <Link to="product-detail-left-sidebar.html">
-                                <img className="img-responsive" src={item.image} alt="Product_Image" />
+                              <Link to="/">
+                                <img className="img-responsive" src={item.anh} alt="Product_Image" />
                               </Link>
                             </div>
                             <div className="product-title">
-                              <Link to="product-detail-left-sidebar.html">
-                                {item.name}
+                              <Link to="/">
+                                {item.ten}
                               </Link>
                             </div>
                             <div className="product-rating">
@@ -110,8 +90,7 @@ const Product = () => {
                               <div className="star" />
                             </div>
                             <div className="product-price">
-                              <span className="sale-price">{item.salePrice}</span>
-                              <span className="base-price">{item.basePrice ? item.basePrice : ''}</span>
+                              <span className="sale-price">{convertMoney(item.dongia)}</span>
                             </div>
                             <div className="product-buttons">
                               <Link className="add-to-cart">
@@ -133,21 +112,21 @@ const Product = () => {
             <div className="tab-pane" id="products-list">
               <div className="products-block layout-5">
                 {
-                  product.map((item, index) => {
+                  listProduct.data?.map((item, index) => {
                     return (
                       <div className="product-item" key={index}>
                         <div className="row">
                           <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                             <div className="product-image">
-                              <Link to="product-detail-left-sidebar.html">
-                                <img className="img-responsive" src={item.image} alt="Product Image" />
+                              <Link to="/">
+                                <img className="img-responsive" src={item.anh} alt="Product_Image" />
                               </Link>
                             </div>
                           </div>
                           <div className="col-lg-8 col-md-8 col-sm-6 col-xs-12">
                             <div className="product-info">
                               <div className="product-title">
-                                <Link to="product-detail-left-sidebar.html">
+                                <Link to="/">
                                   {item.name}
                                 </Link>
                               </div>
@@ -160,11 +139,10 @@ const Product = () => {
                                 <span className="review-count">(3 Reviews)</span>
                               </div>
                               <div className="product-price">
-                                <span className="sale-price">{item.salePrice}</span>
-                                <span className="base-price">{item.basePrice ? item.basePrice : ''}</span>
+                                <span className="sale-price">{convertMoney(item.dongia)}</span>
                               </div>
                               <div className="product-stock">
-                                <i className="fa fa-check-square-o" aria-hidden="true" />{item.stock}
+                                <i className="fa fa-check-square-o" aria-hidden="true" />In stock
                               </div>
                               <div className="product-description">
                                 {item.description}
