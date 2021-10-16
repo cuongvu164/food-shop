@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux';
+import { getCategoryResult } from '../../redux/actions/category'
 
 const SideBar = () => {
+  const dispatch = useDispatch()
+  const listCategory = useSelector(state => state.category.categorys)
+  console.log('listCategory-----', listCategory)
+  useEffect(() => {
+    dispatch(getCategoryResult())
+  }, [])
+
   return (
     <>
       <div id="left-column" className="sidebar col-lg-3 col-md-3 col-sm-3 col-xs-12">
@@ -9,28 +18,37 @@ const SideBar = () => {
         <div className="block product-categories">
           <h3 className="block-title">Categories</h3>
           <div className="block-content">
-            <div className="item">
-              <span className="arrow collapsed" data-toggle="collapse" data-target="#vegetables" aria-expanded="false" role="button">
-                <i className="zmdi zmdi-minus" />
-                <i className="zmdi zmdi-plus" />
-              </span>
-              <Link className="category-title" to="/">Vegetables</Link>
-              <div className="sub-category collapse" id="vegetables" role="main">
-                <div className="item">
-                  <Link to="/">Tomato</Link>
-                </div>
-                <div className="item">
-                  <Link to="/">Broccoli</Link>
-                </div>
-                <div className="item">
-                  <Link to="/">Cabbage</Link>
-                </div>
-                <div className="item">
-                  <Link to="/">Cucumber</Link>
-                </div>
-              </div>
-            </div>
-            <div className="item">
+            {
+              listCategory.map((item, index) => {
+                return (
+                  item.cha === null ? 
+                  <div className="item" key={index}>
+                    <span className="arrow collapsed" data-toggle="collapse" data-target={'#'+item.id} aria-expanded="false" role="button">
+                      <i className="zmdi zmdi-minus" />
+                      <i className="zmdi zmdi-plus" />
+                    </span>
+                    <Link className="category-title" to="/">{item.ten}</Link>
+                    <div className="sub-category collapse" id={item.id} role="main">
+                      <div className="item">
+                        <Link to="/">{item.ten}</Link>
+                      </div>
+                      <div className="item">
+                        <Link to="/">Broccoli</Link>
+                      </div>
+                      <div className="item">
+                        <Link to="/">Cabbage</Link>
+                      </div>
+                      <div className="item">
+                        <Link to="/">Cucumber</Link>
+                      </div>
+                    </div> 
+                  </div>
+                  : false
+                )
+              })
+            }
+
+            {/* <div className="item">
               <span className="arrow collapsed" data-toggle="collapse" data-target="#fruits" aria-expanded="false" role="button">
                 <i className="zmdi zmdi-minus" />
                 <i className="zmdi zmdi-plus" />
@@ -57,7 +75,7 @@ const SideBar = () => {
                 <i className="zmdi zmdi-plus" />
               </span>
               <Link className="category-title" to="/">Juices</Link>
-              <div className="sub-category collapse" id="juices"role="main">
+              <div className="sub-category collapse" id="juices" role="main">
                 <div className="item">
                   <Link to="/">Orange Juices</Link>
                 </div>
@@ -83,7 +101,7 @@ const SideBar = () => {
             </div>
             <div className="item">
               <Link className="category-title" to="/">Fresh Meats</Link>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

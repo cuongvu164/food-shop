@@ -128,7 +128,6 @@ const Product = () => {
                                 <div className="star on " />
                                 <div className="star on" />
                                 <div className="star" />
-                                <span className="review-count">(3 Reviews)</span>
                               </div>
                               <div className="product-price">
                                 <span className="sale-price">{convertMoney(item.dongia)}</span>
