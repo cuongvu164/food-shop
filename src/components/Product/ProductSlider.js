@@ -87,7 +87,7 @@ const ProductSlider = () => {
                 <div className="product-item">
                   <div className="product-image">
                     <a href="product-detail-left-sidebar.html">
-                      <img src="img/product/9.jpg" alt="Product Image" style={{ display: "block", width: "100%" }} />
+                      <img src="img/product/9.jpg" alt="Product_Image" style={{ display: "block", width: "100%" }} />
                     </a>
                   </div>
                   <div className="product-title">

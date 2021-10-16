@@ -91,7 +91,7 @@ const Checkout = () => {
                           <tr>
                             <td>
                               <a href="product-detail-left-sidebar.html">
-                                <img width={80} alt="Product Image" className="img-responsive" src="img/product/19.jpg" />
+                                <img width={80} alt="Product_Image" className="img-responsive" src="img/product/19.jpg" />
                               </a>
                             </td>
                             <td>
@@ -110,7 +110,7 @@ const Checkout = () => {
                           <tr>
                             <td>
                               <a href="product-detail-left-sidebar.html">
-                                <img width={80} alt="Product Image" className="img-responsive" src="img/product/31.jpg" />
+                                <img width={80} alt="Product_Image" className="img-responsive" src="img/product/31.jpg" />
                               </a>
                             </td>
                             <td>

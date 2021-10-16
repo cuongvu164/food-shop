@@ -13,11 +13,6 @@ const Product = () => {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
   }
 
-  const convertString = xmlString => {
-    let doc = new DOMParser().parseFromString(xmlString, "text/xml");
-    return doc
-  }
-
   useEffect(() => {
     dispatch(getProductResult())
   }, [])
@@ -34,7 +29,7 @@ const Product = () => {
                 <div className="gridlist-toggle" role="tablist">
                   <ul className="nav nav-tabs">
                     <li className="active"><Link to="#products-grid" data-toggle="tab" aria-expanded="true"><i className="fa fa-th-large" /></Link></li>
-                    <li><Link to="#products-list" data-toggle="tab" aria-expanded="false"><i className="fa fa-bars" /></Link></li>
+                    <li><Link to="/" data-toggle="tab" aria-expanded="false"><i className="fa fa-bars" /></Link></li>
                   </ul>
                 </div>
                 <div className="total-products">There are 12 products</div>
@@ -101,7 +96,8 @@ const Product = () => {
                               <span className="sale-price">{convertMoney(item.dongia)}</span>
                             </div>
                             <div className="product-buttons">
-                              <Link className="add-to-cart">
+                              <Link className="add-to-cart" to="/">  
+                              {/* chu y */}
                                 <i className="fa fa-shopping-basket" aria-hidden="true" />
                               </Link>
                               <Link className="quickview" to="/">
