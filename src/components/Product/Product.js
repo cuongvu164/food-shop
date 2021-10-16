@@ -29,7 +29,7 @@ const Product = () => {
                 <div className="gridlist-toggle" role="tablist">
                   <ul className="nav nav-tabs">
                     <li className="active"><Link to="#products-grid" data-toggle="tab" aria-expanded="true"><i className="fa fa-th-large" /></Link></li>
-                    <li><Link to="/" data-toggle="tab" aria-expanded="false"><i className="fa fa-bars" /></Link></li>
+                    <li><Link to="#products-list" data-toggle="tab" aria-expanded="false"><i className="fa fa-bars" /></Link></li>
                   </ul>
                 </div>
                 <div className="total-products">There are 12 products</div>
@@ -44,22 +44,10 @@ const Product = () => {
                         <option value={2}>Price: Highest first</option>
                         <option value={3}>Product Name: A to Z</option>
                         <option value={4}>Product Name: Z to A</option>
-                        <option value={5}>In stock</option>
                       </select>
                     </div>
                   </form>
-                  <form action="#" className="pull-right">
-                    <div className="select">
-                      <select className="form-control">
-                        <option value>Relevance</option>
-                        <option value={1}>Price: Lowest first</option>
-                        <option value={2}>Price: Highest first</option>
-                        <option value={3}>Product Name: A to Z</option>
-                        <option value={4}>Product Name: Z to A</option>
-                        <option value={5}>In stock</option>
-                      </select>
-                    </div>
-                  </form>
+                  
                 </div>
               </div>
             </div>
@@ -77,7 +65,7 @@ const Product = () => {
                           <div className="product-item">
                             <div className="product-image">
                               <Link to="/">
-                                <img className="img-responsive" src={item.anh} alt="Product_Image" />
+                                <img className="img-responsive" src={process.env.REACT_APP_URL + item.anh} alt="Product_Image" />
                               </Link>
                             </div>
                             <div className="product-title">
@@ -96,8 +84,8 @@ const Product = () => {
                               <span className="sale-price">{convertMoney(item.dongia)}</span>
                             </div>
                             <div className="product-buttons">
-                              <Link className="add-to-cart" to="/">  
-                              {/* chu y */}
+                              <Link className="add-to-cart" to="/">
+                                {/* chu y */}
                                 <i className="fa fa-shopping-basket" aria-hidden="true" />
                               </Link>
                               <Link className="quickview" to="/">
@@ -123,7 +111,7 @@ const Product = () => {
                           <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                             <div className="product-image">
                               <Link to="/">
-                                <img className="img-responsive" src={item.anh} alt="Product_Image" />
+                                <img className="img-responsive" src={process.env.REACT_APP_URL + item.anh} alt="Product_Image" />
                               </Link>
                             </div>
                           </div>
