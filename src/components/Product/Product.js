@@ -1,22 +1,30 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
+import { Markup } from 'interweave';
 import { getProductResult } from '../../redux/actions/product'
 
 const Product = () => {
   const dispatch = useDispatch()
   const listProduct = useSelector(state => state.product.products)
-  console.log('listProduct------',listProduct.data)
+  console.log('listProduct------', listProduct.data)
+
   const convertMoney = number => {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
   }
-  
+
+  const convertString = xmlString => {
+    let doc = new DOMParser().parseFromString(xmlString, "text/xml");
+    return doc
+  }
+
   useEffect(() => {
     dispatch(getProductResult())
-  },[])
+  }, [])
 
   return (
     <>
+      {/* <img src="/php/thucpham/public/ckfinder/userfiles/images/hanghoa/rau/48raumuong.png" alt="" /> */}
       <div id="center-column" className="col-lg-9 col-md-9 col-sm-9 col-xs-12">
         <div className="product-category-page">
           {/* Nav Bar */}
@@ -145,7 +153,7 @@ const Product = () => {
                                 <i className="fa fa-check-square-o" aria-hidden="true" />In stock
                               </div>
                               <div className="product-description">
-                                {item.description}
+                                <Markup content={item.mota} />
                               </div>
                               <div className="product-buttons">
                                 <Link className="add-to-cart" to="#">
