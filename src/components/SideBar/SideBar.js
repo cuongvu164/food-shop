@@ -58,14 +58,14 @@ const SideBar = () => {
                       <i className="zmdi zmdi-minus" />
                       <i className="zmdi zmdi-plus" />
                     </span>
-                    <Link className="category-title" to="/">{item.ten}</Link>
+                    <Link className="category-title" to={`/product/category/${item.id}`}>{item.ten}</Link>
                     <div className="sub-category collapse" id={item.id} role="main">
                       {
                         newArrayChildren.map((itemChild, index) => {
                           return (
                             item.id === itemChild.cha ?
                               <div className="item" key={index}>
-                                <Link to="/">{itemChild.ten}</Link>
+                                <Link to={`/product/category/${itemChild.id}`}>{itemChild.ten}</Link>
                               </div>
                               : false
                           )

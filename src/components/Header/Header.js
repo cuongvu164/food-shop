@@ -20,7 +20,7 @@ const Header = () => {
             <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
               <div className="logo">
                 <Link to="/">
-                  <img className="img-responsive" src="img/logo.png" alt="Logo" />
+                  <img className="img-responsive" src="/img/logo.png" alt="Logo" />
                 </Link>
               </div>
               <span id="toggle-mobile-menu"><i className="zmdi zmdi-menu" /></span>
