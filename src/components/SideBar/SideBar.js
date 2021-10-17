@@ -7,9 +7,41 @@ const SideBar = () => {
   const dispatch = useDispatch()
   const listCategory = useSelector(state => state.category.categorys)
   console.log('listCategory-----', listCategory)
+
+  const convertArrayByParentID = (arr, id) => {
+    const newArrayParent = arr
+      .filter(item => item.cha === id)
+      .map(item => {
+        // const children = convertArrayByParentID(arr, item.id);
+        return {
+          ...item,
+        }
+      })
+    console.log(id, newArrayParent);
+    return newArrayParent
+  }
+
+  const convertArrayByChildrenID = (arr, id) => {
+    const newArrayChildren = arr
+      .filter(item => item.cha !== id)
+      .map(item => {
+        // const children = convertArrayByParentID(arr, item.id);
+        return {
+          ...item,
+        }
+      })
+    console.log('newArrayChildren-------', newArrayChildren);
+    return newArrayChildren
+  }
+
+  const newListProductParents = convertArrayByParentID(listCategory, null)
+  // console.log('arrayAfterConvert-------', newListProductParents)
+  const newArrayChildren = convertArrayByChildrenID(listCategory, null)
+  // console.log('arrayAfterConvertChildren-------', newArrayChildren)
+
   useEffect(() => {
     dispatch(getCategoryResult())
-  }, [])
+  }, [dispatch])
 
   return (
     <>
@@ -19,89 +51,31 @@ const SideBar = () => {
           <h3 className="block-title">Categories</h3>
           <div className="block-content">
             {
-              listCategory.map((item, index) => {
+              newListProductParents.map((item, index) => {
                 return (
-                  item.cha === null ? 
                   <div className="item" key={index}>
-                    <span className="arrow collapsed" data-toggle="collapse" data-target={'#'+item.id} aria-expanded="false" role="button">
+                    <span className="arrow collapsed" data-toggle="collapse" data-target={'#' + item.id} aria-expanded="false" role="button">
                       <i className="zmdi zmdi-minus" />
                       <i className="zmdi zmdi-plus" />
                     </span>
                     <Link className="category-title" to="/">{item.ten}</Link>
                     <div className="sub-category collapse" id={item.id} role="main">
-                      <div className="item">
-                        <Link to="/">{item.ten}</Link>
-                      </div>
-                      <div className="item">
-                        <Link to="/">Broccoli</Link>
-                      </div>
-                      <div className="item">
-                        <Link to="/">Cabbage</Link>
-                      </div>
-                      <div className="item">
-                        <Link to="/">Cucumber</Link>
-                      </div>
-                    </div> 
+                      {
+                        newArrayChildren.map((itemChild, index) => {
+                          return (
+                            item.id === itemChild.cha ?
+                              <div className="item" key={index}>
+                                <Link to="/">{itemChild.ten}</Link>
+                              </div>
+                              : false
+                          )
+                        })
+                      }
+                    </div>
                   </div>
-                  : false
                 )
               })
             }
-
-            {/* <div className="item">
-              <span className="arrow collapsed" data-toggle="collapse" data-target="#fruits" aria-expanded="false" role="button">
-                <i className="zmdi zmdi-minus" />
-                <i className="zmdi zmdi-plus" />
-              </span>
-              <Link className="category-title" to="/">Fruits</Link>
-              <div className="sub-category collapse" id="fruits" role="main">
-                <div className="item">
-                  <Link to="/">Orange</Link>
-                </div>
-                <div className="item">
-                  <Link to="/">Apple</Link>
-                </div>
-                <div className="item">
-                  <Link to="/">Banana</Link>
-                </div>
-                <div className="item">
-                  <Link to="/">Strawberry</Link>
-                </div>
-              </div>
-            </div>
-            <div className="item">
-              <span className="arrow collapsed" data-toggle="collapse" data-target="#juices" aria-expanded="false" role="button">
-                <i className="zmdi zmdi-minus" />
-                <i className="zmdi zmdi-plus" />
-              </span>
-              <Link className="category-title" to="/">Juices</Link>
-              <div className="sub-category collapse" id="juices" role="main">
-                <div className="item">
-                  <Link to="/">Orange Juices</Link>
-                </div>
-                <div className="item">
-                  <Link to="/">Tomato Juices</Link>
-                </div>
-                <div className="item">
-                  <Link to="/">Apple Juices</Link>
-                </div>
-                <div className="item">
-                  <Link to="/">Peaches Juices</Link>
-                </div>
-              </div>
-            </div>
-            <div className="item">
-              <Link className="category-title" to="/">Tea and Coffee</Link>
-            </div>
-            <div className="item">
-              <Link className="category-title" to="/">Jam</Link>
-            </div>
-            <div className="item">
-              <Link className="category-title" to="/">SeaFood</Link>
-            </div>
-            <div className="item">
-              <Link className="category-title" to="/">Fresh Meats</Link>
-            </div> */}
           </div>
         </div>
       </div>
