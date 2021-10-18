@@ -59,7 +59,7 @@ const cartReducer = (state = initialState, action) => {
       if (quantity <= 0) {
         state.splice(index, 1)
       }
-      localStorage.setItem('cart', JSON.stringify(state))
+      localStorage.setItem('cartFood', JSON.stringify(state))
       return [...state]
 
     case DELETE_TO_CART:

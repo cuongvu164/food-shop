@@ -5,11 +5,19 @@ import {
 import { Markup } from 'interweave';
 import { useDispatch, useSelector } from 'react-redux'
 import { getProductByIDResult } from '../../redux/actions/product'
+import { addToCart } from '../../redux/actions/cart'
 
 const ProductDetail = () => {
   const productByID = useSelector(state => state.product.productByID)
   const params = useParams()
   const dispatch = useDispatch()
+
+  const [amount, setAmount] = useState(1)
+
+  const handleAddToCart = () => {
+    console.log('test amount form',)
+    dispatch(addToCart(productByID, parseInt(amount)))
+  }
 
   const convertMoney = number => {
     return number?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
@@ -64,19 +72,21 @@ const ProductDetail = () => {
                         <span className="control-label">Số lượng: </span>
                         <div className="qty">
                           <div className="input-group">
-                            <input type="text" name="qty" defaultValue={1} data-min={1} />
-                            <span className="adjust-qty">
-                              <span className="adjust-btn plus">+</span>
-                              <span className="adjust-btn minus">-</span>
-                            </span>
+                            <input
+                              type="number"
+                              name="qty"
+                              defaultValue={amount}
+                              min={1}
+                              onChange={(e) => setAmount(e.target.value)}
+                            />
                           </div>
                         </div>
                       </div>
                       <div className="product-buttons">
-                        <a className="add-to-cart" href="#">
+                        <button className="add-to-cart" onClick={() => handleAddToCart()} style={{border: 'none'}}>
                           <i className="fa fa-shopping-basket" aria-hidden="true" />
-                          <span>Add To Cart</span>
-                        </a>
+                          <span>Thêm vào giỏ hàng</span>
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -104,7 +114,7 @@ const ProductDetail = () => {
             </div>
           </div>
         </div>
-        
+
       </div>
     </>
   );

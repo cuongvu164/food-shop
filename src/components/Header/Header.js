@@ -7,6 +7,18 @@ const Header = () => {
   let cart = useSelector(state => state.cart)
   console.log('cartFood------', cart)
 
+  const totalMoney = (cart) => {
+    const result = []
+
+    cart.map(item => {
+      const total = item.quantity * item.listProduct.dongia
+      result.push(total)
+      return true
+    })
+    return convertMoney(result.reduce((a, b) => a + b, 0))
+  }
+
+
   const convertMoney = number => {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
   }
@@ -85,8 +97,8 @@ const Header = () => {
                       </tbody>
                       <tfoot>
                         <tr className="total">
-                          <td>Total:</td>
-                          <td colSpan={2}>$92.96</td>
+                          <td>Tổng:</td>
+                          <td colSpan={2}>{totalMoney(cart)}₫</td>
                         </tr>
                       </tfoot>
                     </table>

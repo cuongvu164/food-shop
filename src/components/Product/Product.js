@@ -149,14 +149,11 @@ const Product = () => {
                               <div className="product-description">
                                 <Markup content={item.mota} />
                               </div>
-                              <div className="product-buttons">
-                                <Link className="add-to-cart" to="#">
-                                  <i className="fa fa-shopping-basket" aria-hidden="true" />
-                                  <span>Add To Cart</span>
-                                </Link>
-                                <Link className="quickview" to="#">
-                                  <i className="fa fa-eye" aria-hidden="true" />
-                                </Link>
+                              <div className="product-buttons" style={{justifyContent: 'left'}}>
+                                <button className="add-to-cart" style={{border: 'none'}}>
+                                  <i className="fa fa-shopping-basket" aria-hidden="true"  onClick={() => dispatch(addToCart(item,1))}/>
+                                  <span>Thêm vào giỏ hàng</span>
+                                </button>
                               </div>
                             </div>
                           </div>
