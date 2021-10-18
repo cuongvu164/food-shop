@@ -13,7 +13,7 @@ const Footer = () => {
                   <div className="block text">
                     <div className="block-content">
                       <a href="index.html" className="logo-footer">
-                        <img src="img/logo-2.png" alt="Logo" />
+                        <img src="/img/logo-2.png" alt="Logo" />
                       </a>
                       <div className="contact">
                         <div className="item d-flex">
@@ -51,42 +51,42 @@ const Footer = () => {
                       <div className="row margin-0">
                         <div className="col-xs-3 col-sm-3 col-md-3 col-lg-3 padding-0">
                           <a href="/">
-                            <img src="img/instagram-1.png" alt="InstagramImage" />
+                            <img src="/img/instagram-1.png" alt="InstagramImage" />
                           </a>
                         </div>
                         <div className="col-xs-3 col-sm-3 col-md-3 col-lg-3 padding-0">
                           <a href="/">
-                            <img src="img/instagram-2.png" alt="InstagramImage" />
+                            <img src="/img/instagram-2.png" alt="InstagramImage" />
                           </a>
                         </div>
                         <div className="col-xs-3 col-sm-3 col-md-3 col-lg-3 padding-0">
                           <a href="/">
-                            <img src="img/instagram-3.png" alt="InstagramImage" />
+                            <img src="/img/instagram-3.png" alt="InstagramImage" />
                           </a>
                         </div>
                         <div className="col-xs-3 col-sm-3 col-md-3 col-lg-3 padding-0">
                           <a href="/">
-                            <img src="img/instagram-4.png" alt="InstagramImage" />
+                            <img src="/img/instagram-4.png" alt="InstagramImage" />
                           </a>
                         </div>
                         <div className="col-xs-3 col-sm-3 col-md-3 col-lg-3 padding-0">
                           <a href="/">
-                            <img src="img/instagram-5.png" alt="InstagramImage" />
+                            <img src="/img/instagram-5.png" alt="InstagramImage" />
                           </a>
                         </div>
                         <div className="col-xs-3 col-sm-3 col-md-3 col-lg-3 padding-0">
                           <a href="/">
-                            <img src="img/instagram-6.png" alt="InstagramImage" />
+                            <img src="/img/instagram-6.png" alt="InstagramImage" />
                           </a>
                         </div>
                         <div className="col-xs-3 col-sm-3 col-md-3 col-lg-3 padding-0">
                           <a href="/">
-                            <img src="img/instagram-7.png" alt="InstagramImage" />
+                            <img src="/img/instagram-7.png" alt="InstagramImage" />
                           </a>
                         </div>
                         <div className="col-xs-3 col-sm-3 col-md-3 col-lg-3 padding-0">
                           <a href="/">
-                            <img src="img/instagram-8.png" alt="InstagramImage" />
+                            <img src="/img/instagram-8.png" alt="InstagramImage" />
                           </a>
                         </div>
                       </div>
@@ -127,7 +127,7 @@ const Footer = () => {
                   <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <div className="item d-flex">
                       <div className="item-left">
-                        <img src="img/home1-payment-1.png" alt="Payment Intro" />
+                        <img src="/img/home1-payment-1.png" alt="Payment Intro" />
                       </div>
                       <div className="item-right">
                         <h3 className="title">Free Shipping item</h3>
@@ -138,7 +138,7 @@ const Footer = () => {
                   <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <div className="item d-flex">
                       <div className="item-left">
-                        <img src="img/home1-payment-2.png" alt="Payment Intro" />
+                        <img src="/img/home1-payment-2.png" alt="Payment Intro" />
                       </div>
                       <div className="item-right">
                         <h3 className="title">Secured Payment</h3>
@@ -149,7 +149,7 @@ const Footer = () => {
                   <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <div className="item d-flex">
                       <div className="item-left">
-                        <img src="img/home1-payment-3.png" alt="Payment Intro" />
+                        <img src="/img/home1-payment-3.png" alt="Payment Intro" />
                       </div>
                       <div className="item-right">
                         <h3 className="title">Money Back Guarantee</h3>
@@ -172,7 +172,7 @@ const Footer = () => {
               <div className="col-lg-5 col-md-5 col-sm-5 col-xs-12 align-right">
                 <div className="payment">
                   <span>Payment Accept</span>
-                  <img src="img/payment.png" alt="Payment" />
+                  <img src="/img/payment.png" alt="Payment" />
                 </div>
               </div>
             </div>

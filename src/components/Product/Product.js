@@ -75,7 +75,7 @@ const Product = () => {
                         <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12" key={index}>
                           <div className="product-item">
                             <div className="product-image">
-                              <Link to="/">
+                              <Link to={`/product/${item.id}`}>
                                 <img className="img-responsive" src={process.env.REACT_APP_URL + item.anh} alt="Product_Image" />
                               </Link>
                             </div>
