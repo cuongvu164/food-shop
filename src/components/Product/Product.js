@@ -1,21 +1,32 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom'
+import './product.scss'
+import {
+  Link,
+  useParams
+} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { Markup } from 'interweave';
-import { getProductResult } from '../../redux/actions/product'
+import { getProductCategoryByIDResult } from '../../redux/actions/product'
+import { addToCart } from '../../redux/actions/cart'
+import Pagination from '../Pagination/Pagination'
 
 const Product = () => {
+  const params = useParams()
   const dispatch = useDispatch()
-  const listProduct = useSelector(state => state.product.products)
-  console.log('listProduct------', listProduct.data)
+  var listProduct = useSelector(state => state.product.products)
+  console.log('listProduct123------', listProduct)
 
   const convertMoney = number => {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
   }
-
+  console.log('param', params)
   useEffect(() => {
-    dispatch(getProductResult())
-  }, [])
+    if (Object.getOwnPropertyNames(params).length !== 0) {
+      dispatch(getProductCategoryByIDResult(params.id))
+    } else {
+      dispatch(getProductCategoryByIDResult(1))
+    }
+  }, [params])
 
   return (
     <>
@@ -47,7 +58,7 @@ const Product = () => {
                       </select>
                     </div>
                   </form>
-                  
+
                 </div>
               </div>
             </div>
@@ -64,7 +75,7 @@ const Product = () => {
                         <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12" key={index}>
                           <div className="product-item">
                             <div className="product-image">
-                              <Link to="/">
+                              <Link to={`/product/${item.id}`}>
                                 <img className="img-responsive" src={process.env.REACT_APP_URL + item.anh} alt="Product_Image" />
                               </Link>
                             </div>
@@ -81,14 +92,14 @@ const Product = () => {
                               <div className="star" />
                             </div>
                             <div className="product-price">
-                              <span className="sale-price">{convertMoney(item.dongia)}</span>
+                              <span className="sale-price">{convertMoney(item.dongia)}₫</span>
                             </div>
                             <div className="product-buttons">
-                              <Link className="add-to-cart" to="/">
+                              <div className="add-to-cart" onClick={() => dispatch(addToCart(item,1))}>
                                 {/* chu y */}
                                 <i className="fa fa-shopping-basket" aria-hidden="true" />
-                              </Link>
-                              <Link className="quickview" to="/">
+                              </div>
+                              <Link className="quickview" to={`/product/${item.id}`}>
                                 <i className="fa fa-eye" aria-hidden="true" />
                               </Link>
                             </div>
@@ -143,9 +154,6 @@ const Product = () => {
                                   <i className="fa fa-shopping-basket" aria-hidden="true" />
                                   <span>Add To Cart</span>
                                 </Link>
-                                <Link className="add-wishlist" to="#">
-                                  <i className="fa fa-heart" aria-hidden="true" />
-                                </Link>
                                 <Link className="quickview" to="#">
                                   <i className="fa fa-eye" aria-hidden="true" />
                                 </Link>
@@ -164,23 +172,7 @@ const Product = () => {
 
 
         {/* Pagination Bar */}
-        <div className="pagination-bar">
-          <div className="row">
-            <div className="col-md-4 col-sm-4 col-xs-12">
-              <div className="text">Showing 1-12 of 20 item(s)</div>
-            </div>
-            <div className="col-md-8 col-sm-8 col-xs-12">
-              <div className="pagination">
-                <ul className="page-list">
-                  <li><Link to="#" className="prev">Previous</Link></li>
-                  <li><Link to="#" className="current">1</Link></li>
-                  <li><Link to="#">2</Link></li>
-                  <li><Link to="#" className="next">Next</Link></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
+        <Pagination />
 
       </div>
     </>

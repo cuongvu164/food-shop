@@ -1,11 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import {
+  useParams
+} from 'react-router-dom'
+import { Markup } from 'interweave';
+import { useDispatch, useSelector } from 'react-redux'
+import { getProductByIDResult } from '../../redux/actions/product'
 
 const ProductDetail = () => {
-  const [activeImage, setActiveImage] = useState('img/product/2.jpg')
+  const productByID = useSelector(state => state.product.productByID)
+  const params = useParams()
+  const dispatch = useDispatch()
 
-  const chooseImage = (e) => {
-    setActiveImage(e.target.getAttribute('src'))
+  const convertMoney = number => {
+    return number?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
   }
+
+  console.log('productByID------', productByID)
+  useEffect(() => {
+    dispatch(getProductByIDResult(params.id))
+  }, [params])
+
   return (
     <>
       <div className="container">
@@ -13,42 +27,35 @@ const ProductDetail = () => {
           <div className="products-block layout-5">
             <div className="product-item">
               <div className="product-title">
-                Organic Strawberry Fruits
+                {productByID.ten}
               </div>
               <div className="row">
                 <div className="product-left col-md-5 col-sm-5 col-xs-12">
                   <div className="product-image vertical">
                     <div className="main-image">
-                      <img className="img-responsive" src={activeImage} alt="Product_Image" />
+                      <img className="img-responsive" src={process.env.REACT_APP_URL + productByID.anh} alt="Product_Image" />
                     </div>
                     <div className="thumb-images">
-                      <img className="img-responsive" src="img/product/33.jpg" alt="Product_Image" onClick={(e) => chooseImage(e)}/>
-                      <img className="img-responsive" src="img/product/3.jpg" alt="Product_Image" onClick={(e) => chooseImage(e)}/>
-                      <img className="img-responsive" src="img/product/7.jpg" alt="Product_Image" onClick={(e) => chooseImage(e)}/>
-                      <img className="img-responsive" src="img/product/30.jpg" alt="Product_Image" onClick={(e) => chooseImage(e)}/>
+                      <img className="img-responsive" src={process.env.REACT_APP_URL + productByID.anh} alt="Product_Image" />
                     </div>
                   </div>
                 </div>
                 <div className="product-right col-md-7 col-sm-7 col-xs-12">
                   <div className="product-info">
                     <div className="product-price">
-                      <span className="sale-price">$80.00</span>
-                      <span className="base-price">$90.00</span>
+                      <span className="sale-price">{convertMoney(productByID.dongia)}</span>
                     </div>
                     <div className="product-stock">
                       <span className="availability">Availability: </span><i className="fa fa-check-square-o" aria-hidden="true" />In stock
                     </div>
                     <div className="product-short-description">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.Suspendisse sapien urna, commodo ut molestie vitae, feugiat tincidunt ligula.Nam gravida nulla in convallis condimentum.
+                      <Markup content={productByID.mota} />
                     </div>
                     <div className="product-variants border-bottom">
                       <div className="product-variants-item">
                         <span className="control-label">Size: </span>
                         <select>
-                          <option value={1} title="S">S</option>
-                          <option value={2} title="M">M</option>
-                          <option value={3} title="L">L</option>
-                          <option value={4} title="One size">One size</option>
+                          <option value={productByID.donvi} title={productByID.donvi}>{productByID.donvi}</option>
                         </select>
                       </div>
                     </div>
@@ -81,7 +88,7 @@ const ProductDetail = () => {
                   <ul>
                     <li className="active">
                       <a data-toggle="tab" href="#description">
-                        <span>Description</span>
+                        <span>Thông tin sản phẩm</span>
                       </a>
                     </li>
                   </ul>
@@ -90,20 +97,14 @@ const ProductDetail = () => {
                 <div className="tab-content">
                   {/* Description */}
                   <div role="tabpanel" className="tab-pane fade in active" id="description">
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</p>
+                    <Markup content={productByID.mota} />
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        {/* Related Products */}
-        <div className="products-block related-products item-4">
-          <div className="block-title">
-            <h2 className="title">Related <span>Products</span></h2>
-          </div>
-        </div>
+        
       </div>
     </>
   );

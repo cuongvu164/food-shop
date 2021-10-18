@@ -1,0 +1,12 @@
+.pagination-bar {
+    .row {
+        .pagination {
+            .page-list {
+                .disabled {
+                    pointer-events: none;
+                    cursor: default;
+                }
+            }
+        }
+    }
+}
