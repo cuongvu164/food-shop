@@ -1,7 +1,22 @@
 import React from 'react';
+import './header.scss'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const Header = () => {
+  let cart = useSelector(state => state.cart)
+  console.log('cartFood------', cart)
+
+  const convertMoney = number => {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+  }
+
+  const total = quantities => {
+    let dem = 0
+    quantities.forEach(item => dem += item.quantity)
+
+    return dem
+  }
   return (
     <>
       <div className="header-top">
@@ -31,7 +46,7 @@ const Header = () => {
                 <div className="cart-title">
                   <Link to="/cart">
                     <i className="fa fa-shopping-basket" />
-                    <span className="cart-count">2</span>
+                    <span className="cart-count">{total(cart)}</span>
                   </Link>
 
                 </div>
@@ -39,53 +54,44 @@ const Header = () => {
                   <div className="cart-content">
                     <table>
                       <tbody>
-                        <tr>
-                          <td className="product-image">
-                            <Link to="/">
-                              <img src="img/product/7.jpg" alt="Product" />
-                            </Link>
-                          </td>
-                          <td>
-                            <div className="product-name">
-                              <Link to="product-detail-left-sidebar.html">Organic Strawberry Fruits</Link>
-                            </div>
-                            <div>
-                              2 x <span className="product-price">$28.98</span>
-                            </div>
-                          </td>
-                          <td className="action">
-                            <Link className="remove" to="/">
-                              <i className="fa fa-trash-o" aria-hidden="true" />
-                            </Link>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td className="product-image">
-                            <Link to="product-detail-left-sidebar.html">
-                              <img src="img/product/6.jpg" alt="Product" />
-                            </Link>
-                          </td>
-                          <td>
-                            <div className="product-name">
-                              <Link to="product-detail-left-sidebar.html">Organic Strawberry</Link>
-                            </div>
-                            <div>
-                              1 x <span className="product-price">$35.00</span>
-                            </div>
-                          </td>
-                          <td className="action">
-                            <Link className="remove" to="/">
-                              <i className="fa fa-trash-o" aria-hidden="true" />
-                            </Link>
-                          </td>
-                        </tr>
+                        {
+                          cart.map((item, index) => {
+                            return (
+                              <tr key={index}>
+                                <td className="product-image">
+                                  <Link to="/">
+                                    <img src={process.env.REACT_APP_URL + item.listProduct.anh} alt="Product" />
+                                  </Link>
+                                </td>
+                                <td>
+                                  <div className="product-name">
+                                    <Link to="product-detail-left-sidebar.html">{item.listProduct.ten}</Link>
+                                  </div>
+                                  <div>
+                                    {item.quantity} x <span className="product-price">{convertMoney(item.listProduct.dongia)}₫</span>
+                                  </div>
+                                </td>
+                                <td className="action">
+                                  <Link className="remove" to="/">
+                                    <i className="fa fa-trash-o" aria-hidden="true" />
+                                  </Link>
+                                </td>
+                              </tr>
+                            )
+                          })
+                        }
+
+
+                      </tbody>
+                      <tfoot>
                         <tr className="total">
                           <td>Total:</td>
                           <td colSpan={2}>$92.96</td>
                         </tr>
-                      </tbody>
+                      </tfoot>
                     </table>
                   </div>
+
                 </div>
               </div>
             </div>

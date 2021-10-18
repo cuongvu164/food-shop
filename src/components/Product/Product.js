@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
+import './product.scss'
 import {
   Link,
   useParams
 } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { Markup } from 'interweave';
-import { getProductResult, getProductCategoryByIDResult } from '../../redux/actions/product'
+import { getProductCategoryByIDResult } from '../../redux/actions/product'
+import { addToCart } from '../../redux/actions/cart'
 import Pagination from '../Pagination/Pagination'
 
 const Product = () => {
@@ -19,14 +21,12 @@ const Product = () => {
   }
   console.log('param', params)
   useEffect(() => {
-    if (Object.getOwnPropertyNames(params).length !== 0 ) {
+    if (Object.getOwnPropertyNames(params).length !== 0) {
       dispatch(getProductCategoryByIDResult(params.id))
     } else {
       dispatch(getProductCategoryByIDResult(1))
     }
   }, [params])
-
-
 
   return (
     <>
@@ -95,11 +95,11 @@ const Product = () => {
                               <span className="sale-price">{convertMoney(item.dongia)}₫</span>
                             </div>
                             <div className="product-buttons">
-                              <Link className="add-to-cart" to="/">
+                              <div className="add-to-cart" onClick={() => dispatch(addToCart(item,1))}>
                                 {/* chu y */}
                                 <i className="fa fa-shopping-basket" aria-hidden="true" />
-                              </Link>
-                              <Link className="quickview" to="/">
+                              </div>
+                              <Link className="quickview" to={`/product/${item.id}`}>
                                 <i className="fa fa-eye" aria-hidden="true" />
                               </Link>
                             </div>
@@ -154,9 +154,6 @@ const Product = () => {
                                   <i className="fa fa-shopping-basket" aria-hidden="true" />
                                   <span>Add To Cart</span>
                                 </Link>
-                                <Link className="add-wishlist" to="#">
-                                  <i className="fa fa-heart" aria-hidden="true" />
-                                </Link>
                                 <Link className="quickview" to="#">
                                   <i className="fa fa-eye" aria-hidden="true" />
                                 </Link>
@@ -175,7 +172,7 @@ const Product = () => {
 
 
         {/* Pagination Bar */}
-        <Pagination/>
+        <Pagination />
 
       </div>
     </>
