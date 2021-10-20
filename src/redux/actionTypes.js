@@ -1,9 +1,11 @@
 export const API_URL = "http://localhost:8000/api"
 
+//Product
 export const GET_ALL_PRODUCT = "GET_ALL_PRODUCT"
 export const GET_ALL_CATEGORY = "GET_ALL_CATEGORY"
 export const GET_PRODUCT_CATEGORY_ID = "GET_PRODUCT_CATEGORY_ID"
 export const GET_PRODUCT_ID = "GET_PRODUCT_ID"
+export const GET_PRODUCT_PAGINATION = "GET_PRODUCT_PAGINATION"
 
 //Cart
 export const ADD_TO_CART = "ADD_TO_CART"

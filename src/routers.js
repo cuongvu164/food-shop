@@ -14,6 +14,7 @@ export const routers = [
   { path: '/', exact: true, Component: HomePage },
   { path: '/product', exact: true, Component: ProductPage },
   { path: '/product/category/:id', exact: true, Component: ProductPage },
+  { path: '/product/category/:id/page=:page', exact: true, Component: ProductPage },
   { path: '/cart', exact: true, Component: CartPage },
   { path: '/login', exact: true, Component: SignInPage },
   { path: '/register', exact: true, Component: SignUpPage },

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './product.scss'
 import {
   Link,
@@ -6,31 +6,35 @@ import {
 } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { Markup } from 'interweave';
-import { getProductCategoryByIDResult } from '../../redux/actions/product'
+import { getProductCategoryByIDResult, getProductPaginationResult } from '../../redux/actions/product'
 import { addToCart } from '../../redux/actions/cart'
 import Pagination from '../Pagination/Pagination'
 
 const Product = () => {
   const params = useParams()
+  console.log("🚀 ~ file: Product.js ~ line 15 ~ Product ~ params", params.page)
   const dispatch = useDispatch()
   var listProduct = useSelector(state => state.product.products)
-  console.log('listProduct123------', listProduct)
+  console.log('listProduct123------', listProduct.current_page)
+  const [pagination, setPagination] = useState(1)
 
   const convertMoney = number => {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
   }
+
   console.log('param', params)
   useEffect(() => {
     if (Object.getOwnPropertyNames(params).length !== 0) {
-      dispatch(getProductCategoryByIDResult(params.id))
+      // dispatch(getProductCategoryByIDResult(params.id))
+      dispatch(getProductPaginationResult(params.id, params.page))
     } else {
-      dispatch(getProductCategoryByIDResult(1))
+      // dispatch(getProductCategoryByIDResult(1))
+      dispatch(getProductPaginationResult(1, pagination))
     }
-  }, [params])
+  }, [params, pagination, dispatch])
 
   return (
     <>
-      {/* <img src="/php/thucpham/public/ckfinder/userfiles/images/hanghoa/rau/48raumuong.png" alt="" /> */}
       <div id="center-column" className="col-lg-9 col-md-9 col-sm-9 col-xs-12">
         <div className="product-category-page">
           {/* Nav Bar */}
@@ -95,7 +99,7 @@ const Product = () => {
                               <span className="sale-price">{convertMoney(item.dongia)}₫</span>
                             </div>
                             <div className="product-buttons">
-                              <div className="add-to-cart" onClick={() => dispatch(addToCart(item,1))}>
+                              <div className="add-to-cart" onClick={() => dispatch(addToCart(item, 1))}>
                                 {/* chu y */}
                                 <i className="fa fa-shopping-basket" aria-hidden="true" />
                               </div>
@@ -149,9 +153,9 @@ const Product = () => {
                               <div className="product-description">
                                 <Markup content={item.mota} />
                               </div>
-                              <div className="product-buttons" style={{justifyContent: 'left'}}>
-                                <button className="add-to-cart" style={{border: 'none'}}>
-                                  <i className="fa fa-shopping-basket" aria-hidden="true"  onClick={() => dispatch(addToCart(item,1))}/>
+                              <div className="product-buttons" style={{ justifyContent: 'left' }}>
+                                <button className="add-to-cart" style={{ border: 'none' }}>
+                                  <i className="fa fa-shopping-basket" aria-hidden="true" onClick={() => dispatch(addToCart(item, 1))} />
                                   <span>Thêm vào giỏ hàng</span>
                                 </button>
                               </div>
@@ -167,9 +171,13 @@ const Product = () => {
           </div>
         </div>
 
-
         {/* Pagination Bar */}
-        <Pagination />
+        <Pagination
+          total={listProduct.total}
+          categoryId={params.id}
+          prev={listProduct.next_page_url}
+          next={listProduct.prev_page_url}
+        />
 
       </div>
     </>

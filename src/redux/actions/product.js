@@ -1,5 +1,5 @@
 import callAPI from '../../callAPI/callAPI'
-import { GET_ALL_PRODUCT, GET_PRODUCT_CATEGORY_ID, GET_PRODUCT_ID } from '../actionTypes'
+import { GET_ALL_PRODUCT, GET_PRODUCT_CATEGORY_ID, GET_PRODUCT_ID, GET_PRODUCT_PAGINATION } from '../actionTypes'
 
 export const getProduct = payload => {
   return {
@@ -10,9 +10,9 @@ export const getProduct = payload => {
 
 export const getProductResult = () => {
   return dispatch => {
-    return callAPI('product','GET',null)
+    return callAPI('product', 'GET', null)
       .then(response => {
-         dispatch(getProduct(response))
+        dispatch(getProduct(response))
       })
   }
 }
@@ -26,7 +26,7 @@ export const getProductCategoryByID = id => {
 
 export const getProductCategoryByIDResult = id => {
   return dispatch => {
-    return callAPI(`product/category/${id}`,'GET',null)
+    return callAPI(`product/category/${id}`, 'GET', null)
       .then(response => {
         dispatch(getProductCategoryByID(response))
       })
@@ -42,9 +42,25 @@ export const getProductByID = id => {
 
 export const getProductByIDResult = id => {
   return dispatch => {
-    return callAPI(`product/${id}`,'GET',null)
+    return callAPI(`product/${id}`, 'GET', null)
       .then(response => {
-         dispatch(getProductByID(response))
+        dispatch(getProductByID(response))
+      })
+  }
+}
+
+export const getProductPagination = (id) => {
+  return {
+    type: GET_PRODUCT_PAGINATION,
+    id
+  }
+}
+
+export const getProductPaginationResult = (id, pageNumber) => {
+  return dispatch => {
+    return callAPI(`product/category/${id}?page=${pageNumber}`, 'GET', null)
+      .then(response => {
+        dispatch(getProductPagination(response))
       })
   }
 }
