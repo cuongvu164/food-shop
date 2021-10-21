@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import './product.scss'
 import {
   Link,
@@ -6,32 +6,35 @@ import {
 } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { Markup } from 'interweave';
-import { getProductCategoryByIDResult, getProductPaginationResult } from '../../redux/actions/product'
+import { getProductPaginationResult } from '../../redux/actions/product'
 import { addToCart } from '../../redux/actions/cart'
 import Pagination from '../Pagination/Pagination'
 
 const Product = () => {
   const params = useParams()
-  console.log("🚀 ~ file: Product.js ~ line 15 ~ Product ~ params", params.page)
+  // console.log("🚀 ~ file: Product.js ~ line 15 ~ Product ~ params", params.page)
   const dispatch = useDispatch()
   var listProduct = useSelector(state => state.product.products)
-  console.log('listProduct123------', listProduct.current_page)
-  const [pagination, setPagination] = useState(1)
+  // console.log('listProduct123------', listProduct.current_page)
 
   const convertMoney = number => {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
   }
 
-  console.log('param', params)
+  // console.log('param', params)
   useEffect(() => {
     if (Object.getOwnPropertyNames(params).length !== 0) {
-      // dispatch(getProductCategoryByIDResult(params.id))
       dispatch(getProductPaginationResult(params.id, params.page))
     } else {
-      // dispatch(getProductCategoryByIDResult(1))
-      dispatch(getProductPaginationResult(1, pagination))
+      dispatch(getProductPaginationResult(1, 1))
     }
-  }, [params, pagination, dispatch])
+  }, [params, dispatch])
+
+  useEffect(() => {
+    if(!params.id) {
+      params.id = 1
+    }
+  },[params])
 
   return (
     <>
@@ -175,8 +178,9 @@ const Product = () => {
         <Pagination
           total={listProduct.total}
           categoryId={params.id}
-          prev={listProduct.next_page_url}
-          next={listProduct.prev_page_url}
+          next={listProduct.next_page_url}
+          prev={listProduct.prev_page_url}
+          currentPage={params.page}
         />
 
       </div>

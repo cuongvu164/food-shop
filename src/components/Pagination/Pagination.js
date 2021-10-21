@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './pagination.scss'
 import { Link } from 'react-router-dom'
 
 const Pagination = (props) => {
   const pageNumber = []
-  const [pagination, setPagination] = useState(1)
+  const [pagination, setPagination] = useState(null)
 
   const splitStringURL = string => {
     if (string != null) {
@@ -22,6 +22,10 @@ const Pagination = (props) => {
   numberPages(props.total)
   // console.log('pagination', pagination)
   // console.log('pageNumber', pageNumber)
+
+  useEffect(() => {
+    props.currentPage ? setPagination(props.currentPage) : setPagination(1)
+  }, [props.currentPage])
   return (
     <>
       <div className="pagination-bar">
@@ -32,21 +36,23 @@ const Pagination = (props) => {
           <div className="col-md-8 col-sm-8 col-xs-12">
             <div className="pagination">
               <ul className="page-list">
-                <li><Link
-                  to={`/product/category/${props.categoryId}/page=${splitStringURL(props.prev)}`}
-                  className={pagination === 1 ? 'prev disabled' : 'prev'}
-                  // setPagination={splitStringURL(props.prev) != 1 ? splitStringURL(props.prev) : 1}
-                >
-                  Previous
-                </Link>
+                <li >
+                  <Link
+                    to={`/product/category/${props.categoryId}/page=${splitStringURL(props.prev)}`}
+                    className={parseInt(pagination) === 1 ? 'prev disabled' : 'prev'}
+                    onClick={() => setPagination(pagination - 1)}
+                  >
+                    Previous
+                  </Link>
                 </li>
                 {
                   pageNumber.map((item, index) => {
+                    console.log('pagination--------2', pagination)
                     return (
                       <li key={index}>
                         <Link
                           to={`/product/category/${props.categoryId}/page=${item}`}
-                          className={pagination === index + 1 ? 'current' : ''}
+                          className={parseInt(pagination) === index + 1 ? 'current' : ''}
                           onClick={() => setPagination(item)}
                         >
                           {item}
@@ -55,13 +61,14 @@ const Pagination = (props) => {
                     )
                   })
                 }
-                <li><Link
-                  to={`/product/category/${props.categoryId}/page=${splitStringURL(props.next)}`}
-                  className={pagination === pageNumber.length ? 'next disabled' : 'next'}
-                  // setPagination={splitStringURL(props.next) == pageNumber.length ? 3 : splitStringURL(props.next)}
-                >
-                  Next
-                </Link>
+                <li>
+                  <Link
+                    to={`/product/category/${props.categoryId}/page=${splitStringURL(props.next)}`}
+                    className={parseInt(pagination) === parseInt(pageNumber.length) ? 'next disabled' : 'next'}
+                    onClick={() => setPagination(pagination + 1)}
+                  >
+                    Next
+                  </Link>
                 </li>
               </ul>
             </div>

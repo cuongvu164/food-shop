@@ -1,9 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper-bundle.css';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { getProductResult } from '../../redux/actions/product'
 
 const ProductSlider = () => {
+  const dispatch = useDispatch()
+  const products = useSelector(state => state.product.products)
+  console.log("🚀 ~ file: ProductSlider.js ~ line 11 ~ ProductSlider ~ products", products)
+
+  const convertMoney = number => {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+  }
+
+  useEffect(() => {
+    dispatch(getProductResult())
+  }, [dispatch])
+
   const styleSwiper = {
     width: '182.167px',
     marginRight: '30px'
@@ -18,235 +32,46 @@ const ProductSlider = () => {
               spaceBetween={15}
               slidesPerView={6}
             >
-              <SwiperSlide style={styleSwiper}>
-                <div className="product-item">
-                  <div className="product-image">
-                    <a href="product-detail-left-sidebar.html">
-                      <img src="img/product/4.jpg" alt="ProductImage" style={{ display: "block", width: "100%" }} />
-                    </a>
-                  </div>
-                  <div className="product-title">
-                    <a href="product-detail-left-sidebar.html">
-                      Organic Strawberry Fruits
-                    </a>
-                  </div>
-                  <div className="product-rating">
-                    <div className="star on" />
-                    <div className="star on" />
-                    <div className="star on" />
-                    <div className="star on" />
-                    <div className="star" />
-                  </div>
-                  <div className="product-price">
-                    <span className="sale-price">$80.00</span>
-                    <span className="base-price">$90.00</span>
-                  </div>
-                  <div className="product-buttons">
-                    <a className="add-to-cart" href="/">
-                      <i className="fa fa-shopping-basket" aria-hidden="true" />
-                    </a>
-                    <a className="quick-view" href="/">
-                      <i className="fa fa-eye" aria-hidden="true" />
-                    </a>
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide style={styleSwiper}>
-                <div className="product-item">
-                  <div className="product-image">
-                    <a href="product-detail-left-sidebar.html">
-                      <img src="img/product/8.jpg" alt="Product_Image" style={{ display: "block", width: "100%" }} />
-                    </a>
-                  </div>
-                  <div className="product-title">
-                    <a href="product-detail-left-sidebar.html">
-                      Organic Strawberry Fruits
-                    </a>
-                  </div>
-                  <div className="product-rating">
-                    <div className="star on" />
-                    <div className="star on" />
-                    <div className="star on " />
-                    <div className="star on" />
-                    <div className="star" />
-                  </div>
-                  <div className="product-price">
-                    <span className="sale-price">$120.00</span>
-                  </div>
-                  <div className="product-buttons">
-                    <a className="add-to-cart" href="/">
-                      <i className="fa fa-shopping-basket" aria-hidden="true" />
-                    </a>
-                    <a className="quickview" href="/">
-                      <i className="fa fa-eye" aria-hidden="true" />
-                    </a>
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide style={styleSwiper}>
-                <div className="product-item">
-                  <div className="product-image">
-                    <a href="product-detail-left-sidebar.html">
-                      <img src="img/product/9.jpg" alt="Product_Image" style={{ display: "block", width: "100%" }} />
-                    </a>
-                  </div>
-                  <div className="product-title">
-                    <a href="product-detail-left-sidebar.html">
-                      Organic Strawberry Fruits
-                    </a>
-                  </div>
-                  <div className="product-rating">
-                    <div className="star on" />
-                    <div className="star on" />
-                    <div className="star on " />
-                    <div className="star on" />
-                    <div className="star on" />
-                  </div>
-                  <div className="product-price">
-                    <span className="sale-price">$80.00</span>
-                    <span className="base-price">$90.00</span>
-                  </div>
-                  <div className="product-buttons">
-                    <a className="add-to-cart" href="#">
-                      <i className="fa fa-shopping-basket" aria-hidden="true" />
-                    </a>
-                    <a className="quickview" href="#">
-                      <i className="fa fa-eye" aria-hidden="true" />
-                    </a>
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide style={styleSwiper}>
-                <div className="product-item">
-                  <div className="product-image">
-                    <a href="product-detail-left-sidebar.html">
-                      <img src="img/product/10.jpg" alt="Product Image" style={{ display: "block", width: "100%" }} />
-                    </a>
-                  </div>
-                  <div className="product-title">
-                    <a href="product-detail-left-sidebar.html">
-                      Organic Strawberry Fruits
-                    </a>
-                  </div>
-                  <div className="product-rating">
-                    <div className="star on" />
-                    <div className="star on" />
-                    <div className="star on " />
-                    <div className="star on" />
-                    <div className="star" />
-                  </div>
-                  <div className="product-price">
-                    <span className="sale-price">$96.00</span>
-                  </div>
-                  <div className="product-buttons">
-                    <a className="add-to-cart" href="#">
-                      <i className="fa fa-shopping-basket" aria-hidden="true" />
-                    </a>
-                    <a className="quickview" href="#">
-                      <i className="fa fa-eye" aria-hidden="true" />
-                    </a>
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide style={styleSwiper}>
-                <div className="product-item">
-                  <div className="product-image">
-                    <a href="product-detail-left-sidebar.html">
-                      <img src="img/product/33.jpg" alt="Product Image" style={{ display: "block", width: "100%" }} />
-                    </a>
-                  </div>
-                  <div className="product-title">
-                    <a href="product-detail-left-sidebar.html">
-                      Organic Strawberry Fruits
-                    </a>
-                  </div>
-                  <div className="product-rating">
-                    <div className="star on" />
-                    <div className="star on" />
-                    <div className="star on " />
-                    <div className="star on" />
-                    <div className="star" />
-                  </div>
-                  <div className="product-price">
-                    <span className="sale-price">$80.00</span>
-                    <span className="base-price">$90.00</span>
-                  </div>
-                  <div className="product-buttons">
-                    <a className="add-to-cart" href="#">
-                      <i className="fa fa-shopping-basket" aria-hidden="true" />
-                    </a>
-                    <a className="quickview" href="#">
-                      <i className="fa fa-eye" aria-hidden="true" />
-                    </a>
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide style={styleSwiper}>
-                <div className="product-item">
-                  <div className="product-image">
-                    <a href="product-detail-left-sidebar.html">
-                      <img src="img/product/5.jpg" alt="Product Image" style={{ display: "block", width: "100%" }} />
-                    </a>
-                  </div>
-                  <div className="product-title">
-                    <a href="product-detail-left-sidebar.html">
-                      Organic Strawberry Fruits
-                    </a>
-                  </div>
-                  <div className="product-rating">
-                    <div className="star on" />
-                    <div className="star on" />
-                    <div className="star on " />
-                    <div className="star on" />
-                    <div className="star" />
-                  </div>
-                  <div className="product-price">
-                    <span className="sale-price">$80.00</span>
-                    <span className="base-price">$90.00</span>
-                  </div>
-                  <div className="product-buttons">
-                    <a className="add-to-cart" href="#">
-                      <i className="fa fa-shopping-basket" aria-hidden="true" />
-                    </a>
-                    <a className="quickview" href="#">
-                      <i className="fa fa-eye" aria-hidden="true" />
-                    </a>
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide style={styleSwiper}>
-                <div className="product-item">
-                  <div className="product-image">
-                    <a href="product-detail-left-sidebar.html">
-                      <img src="img/product/6.jpg" alt="Product Image" style={{ display: "block", width: "100%" }} />
-                    </a>
-                  </div>
-                  <div className="product-title">
-                    <a href="product-detail-left-sidebar.html">
-                      Organic Strawberry Fruits
-                    </a>
-                  </div>
-                  <div className="product-rating">
-                    <div className="star on" />
-                    <div className="star on" />
-                    <div className="star on " />
-                    <div className="star on" />
-                    <div className="star" />
-                  </div>
-                  <div className="product-price">
-                    <span className="sale-price">$80.00</span>
-                    <span className="base-price">$90.00</span>
-                  </div>
-                  <div className="product-buttons">
-                    <a className="add-to-cart" href="#">
-                      <i className="fa fa-shopping-basket" aria-hidden="true" />
-                    </a>
-                    <a className="quickview" href="#">
-                      <i className="fa fa-eye" aria-hidden="true" />
-                    </a>
-                  </div>
-                </div>
-              </SwiperSlide>
+              {
+                products.data?.map((item, index) => {
+                  return (
+                    <SwiperSlide style={styleSwiper} key={index}>
+                      <div className="product-item">
+                        <div className="product-image">
+                          <Link to={`/product/${item.id}`}>
+                            <img src={process.env.REACT_APP_URL + item.anh} alt="ProductImage" style={{ display: "block", width: "100%" }} />
+                          </Link>
+                        </div>
+                        <div className="product-title">
+                          <Link to={`/product/${item.id}`}>
+                            {item.ten}
+                          </Link>
+                        </div>
+                        <div className="product-rating">
+                          <div className="star on" />
+                          <div className="star on" />
+                          <div className="star on" />
+                          <div className="star on" />
+                          <div className="star" />
+                        </div>
+                        <div className="product-price">
+                          <span className="sale-price">{convertMoney(item.dongia)}₫</span>
+                        </div>
+                        <div className="product-buttons">
+                          <a className="add-to-cart" href="/">
+                            <i className="fa fa-shopping-basket" aria-hidden="true" />
+                          </a>
+                          <a className="quick-view" href="/">
+                            <i className="fa fa-eye" aria-hidden="true" />
+                          </a>
+                        </div>
+                      </div>
+                    </SwiperSlide>
+                  )
+                })
+              }
+
+              
             </Swiper>
           </div>
         </div>
