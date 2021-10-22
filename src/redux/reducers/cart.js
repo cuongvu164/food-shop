@@ -1,4 +1,4 @@
-import { ADD_TO_CART, UPDATE_TO_CART, DELETE_TO_CART } from '../actionTypes'
+import { ADD_TO_CART, UPDATE_TO_CART, DELETE_TO_CART, CART_COMPLETE } from '../actionTypes'
 
 const cartFood = JSON.parse(localStorage.getItem('cartFood'));
 
@@ -72,6 +72,10 @@ const cartReducer = (state = initialState, action) => {
         state.splice(index, 1);
       }
       localStorage.setItem('cartFood', JSON.stringify(state))
+      return [...state]
+    case CART_COMPLETE:
+      localStorage.removeItem('cartFood')
+      state = [];
       return [...state]
 
 

@@ -1,5 +1,5 @@
 import callAPI from '../../callAPI/callAPI'
-import { REGISTER_USER, LOGIN_USER, GET_USER, LOGOUT_USER, GET_ALL_USER } from '../actionTypes'
+import { REGISTER_USER, LOGIN_USER, GET_USER, LOGOUT_USER, GET_ALL_USER, GET_ALL_ORDER, ADD_ORDER } from '../actionTypes'
 import { message } from 'antd';
 
 const key = 'updatable'
@@ -68,11 +68,45 @@ export const loginUserRequest = (user, isLogin) => {
 
 export const loginUserAPI = user => {
   return dispatch => {
-    return callAPI(`user/email=${user}`, 'GET', null)
+    return callAPI(`user/email/${user}`, 'GET', null)
       .then(response => {
-        dispatch(loginUserRequest(response,true))
+        dispatch(loginUserRequest(response, true))
       }).catch(err => {
         message.error({ content: 'Sai tên đăng nhập hoặc mật khẩu !', key, duration: 2 })
+      })
+  }
+}
+
+//Oder
+export const getAllOrder = payload => {
+  return {
+    type: GET_ALL_ORDER,
+    payload
+  }
+}
+
+export const getAllOrderResult = () => {
+  return dispatch => {
+    return callAPI(`bill`, 'GET', null)
+      .then(response => {
+        dispatch(getAllOrder(response))
+      })
+  }
+}
+
+//Add order
+export const userOrder = payload => {
+  return {
+    type: ADD_ORDER,
+    payload
+  }
+}
+
+export const userOrderAPI = order => {
+  return dispatch => {
+    return callAPI('bill-detail', 'POST', order)
+      .then(response => {
+        dispatch(userOrder(response))
       })
   }
 }
