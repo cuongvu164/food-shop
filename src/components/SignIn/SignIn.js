@@ -14,6 +14,9 @@ const SignIn = () => {
   console.log('user------', user)
   const dispatch = useDispatch()
 
+  // const userInLogged = JSON.parse(localStorage.getItem('userLogin'));
+  // console.log("🚀 ~ file: SignIn.js ~ line 18 ~ SignIn ~ userInLogged--", userInLogged)
+  
   const [form] = Form.useForm()
   let history = useHistory()
 

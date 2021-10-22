@@ -1,11 +1,17 @@
 import React from 'react';
 import './header.scss'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { logoutUserRequest } from '../../redux/actions/user'
 
 const Header = () => {
+  const dispatch = useDispatch()
   let cart = useSelector(state => state.cart)
   console.log('cartFood------', cart)
+
+  const setLogout = () => {
+    dispatch(logoutUserRequest())
+  }
 
   const totalMoney = (cart) => {
     const result = []
@@ -121,6 +127,9 @@ const Header = () => {
                   </div>
                   <div className="item">
                     <Link to="/register" title="Register Account"><i className="fa fa-user" />Register</Link>
+                  </div>
+                  <div className="item">
+                    <Link to="/" title="Register Account" onClick={() => setLogout()}><i className="fa fa-sign-out" />Sign Out</Link>
                   </div>
                 </div>
               </div>

@@ -77,6 +77,12 @@ export const loginUserAPI = user => {
   }
 }
 
+export const logoutUserRequest = () => {
+  return {
+      type: LOGOUT_USER
+  }
+}
+
 //Oder
 export const getAllOrder = payload => {
   return {

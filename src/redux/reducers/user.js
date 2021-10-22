@@ -3,25 +3,34 @@ import { message } from 'antd';
 const key = 'updatable';
 
 // const user = JSON.parse(localStorage.getItem('user'));
-// const userInLogged = JSON.parse(localStorage.getItem('userLogin'));
+const userInLogged = JSON.parse(localStorage.getItem('userLoginFood'))
+// const initialState = {
+//   user: [],
+//   currentUser: [],
+//   isLogin: false
+// }
 
-const initialState = {
+const initialLoginUser = {
   user: [],
   currentUser: [],
   isLogin: false
 }
+const initialState = userInLogged ? userInLogged : initialLoginUser
+
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_USER:
       return {
         ...state,
-        user: action.payload.data
+        user: action.payload.data,
+        // currentUser: action.user.data
       }
     case GET_USER:
       return {
         ...state,
-        user: action.email.data
+        user: action.email.data,
+        // currentUser: action.user.data
       }
 
     case REGISTER_USER:
@@ -49,7 +58,18 @@ const userReducer = (state = initialState, action) => {
         currentUser: action.user.data,
         isLogin: true
       }
-
+    
+    case LOGOUT_USER:
+      const userLogout = {
+        currentUser: [],
+        isLogin: false
+      }
+      localStorage.setItem('userLoginFood', JSON.stringify(userLogout))
+      return {
+        ...state,
+        currentUser: [],
+        isLogin: false
+      }
 
 
     default: return state
