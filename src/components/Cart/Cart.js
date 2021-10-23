@@ -4,15 +4,12 @@ import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
 import { updateToCart, deleteToCart } from '../../redux/actions/cart'
 import { useHistory } from 'react-router-dom'
+import  convertMoney  from '../convertMoney'
 
 const Cart = () => {
   const dispatch = useDispatch()
   const listItemCart = useSelector(state => state.cart)
   let history = useHistory()
-
-  const convertMoney = number => {
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-  }
 
   const totalMoney = (cart) => {
     const result = []

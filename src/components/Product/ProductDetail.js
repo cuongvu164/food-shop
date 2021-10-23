@@ -6,6 +6,7 @@ import { Markup } from 'interweave';
 import { useDispatch, useSelector } from 'react-redux'
 import { getProductByIDResult } from '../../redux/actions/product'
 import { addToCart } from '../../redux/actions/cart'
+import  convertMoney  from '../convertMoney'
 
 const ProductDetail = () => {
   const productByID = useSelector(state => state.product.productByID)
@@ -17,10 +18,6 @@ const ProductDetail = () => {
   const handleAddToCart = () => {
     console.log('test amount form',)
     dispatch(addToCart(productByID, parseInt(amount)))
-  }
-
-  const convertMoney = number => {
-    return number?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
   }
 
   console.log('productByID------', productByID)

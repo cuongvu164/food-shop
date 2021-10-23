@@ -9,6 +9,7 @@ import { Markup } from 'interweave';
 import { getProductPaginationResult } from '../../redux/actions/product'
 import { addToCart } from '../../redux/actions/cart'
 import Pagination from '../Pagination/Pagination'
+import  convertMoney  from '../convertMoney'
 
 const Product = () => {
   const params = useParams()
@@ -16,10 +17,6 @@ const Product = () => {
   const dispatch = useDispatch()
   var listProduct = useSelector(state => state.product.products)
   // console.log('listProduct123------', listProduct.current_page)
-
-  const convertMoney = number => {
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-  }
 
   // console.log('param', params)
   useEffect(() => {
@@ -31,10 +28,10 @@ const Product = () => {
   }, [params, dispatch])
 
   useEffect(() => {
-    if(!params.id) {
+    if (!params.id) {
       params.id = 1
     }
-  },[params])
+  }, [params])
 
   return (
     <>
@@ -99,7 +96,7 @@ const Product = () => {
                               <div className="star" />
                             </div>
                             <div className="product-price">
-                              <span className="sale-price">{convertMoney(item.dongia)}₫</span>
+                              <span className="sale-price">{convertMoney(item.dongia)}</span>
                             </div>
                             <div className="product-buttons">
                               <div className="add-to-cart" onClick={() => dispatch(addToCart(item, 1))}>

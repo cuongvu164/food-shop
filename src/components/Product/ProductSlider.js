@@ -4,15 +4,12 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper-bundle.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProductResult } from '../../redux/actions/product'
+import  convertMoney  from '../convertMoney'
 
 const ProductSlider = () => {
   const dispatch = useDispatch()
   const products = useSelector(state => state.product.products)
   console.log("🚀 ~ file: ProductSlider.js ~ line 11 ~ ProductSlider ~ products", products)
-
-  const convertMoney = number => {
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-  }
 
   useEffect(() => {
     dispatch(getProductResult())
@@ -55,7 +52,7 @@ const ProductSlider = () => {
                           <div className="star" />
                         </div>
                         <div className="product-price">
-                          <span className="sale-price">{convertMoney(item.dongia)}₫</span>
+                          <span className="sale-price">{convertMoney(item.dongia)}</span>
                         </div>
                         <div className="product-buttons">
                           <a className="add-to-cart" href="/">

@@ -9,7 +9,7 @@ const NotFound = () => {
           <div className="row">
             <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12 page-left">
               <div className="image">
-                <img className="img-responsive" src="img/404-left.png" alt="Image_404" />
+                <img className="img-responsive" src="/img/404-left.png" alt="Image_404" />
               </div>
               <div className="title">We’re sorry — something has gone wrong on our end.</div>
               <div className="content">If difficulties persist, please contact the System Administrator of this site and report the error below.</div>
@@ -17,7 +17,7 @@ const NotFound = () => {
             </div>
             <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12 page-right">
               <div className="image">
-                <img className="img-responsive" src="img/404-right.jpg" alt="Image_404" />
+                <img className="img-responsive" src="/img/404-right.jpg" alt="Image_404" />
               </div>
             </div>
           </div>

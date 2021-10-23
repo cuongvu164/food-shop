@@ -3,6 +3,7 @@ import './header.scss'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { logoutUserRequest } from '../../redux/actions/user'
+import  convertMoney  from '../ConvertMoney'
 
 const Header = () => {
   const dispatch = useDispatch()
@@ -22,11 +23,6 @@ const Header = () => {
       return true
     })
     return convertMoney(result.reduce((a, b) => a + b, 0))
-  }
-
-
-  const convertMoney = number => {
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
   }
 
   const total = quantities => {
@@ -86,7 +82,7 @@ const Header = () => {
                                     <Link to="product-detail-left-sidebar.html">{item.listProduct.ten}</Link>
                                   </div>
                                   <div>
-                                    {item.quantity} x <span className="product-price">{convertMoney(item.listProduct.dongia)}₫</span>
+                                    {item.quantity} x <span className="product-price">{convertMoney(item.listProduct.dongia)}</span>
                                   </div>
                                 </td>
                                 <td className="action">
