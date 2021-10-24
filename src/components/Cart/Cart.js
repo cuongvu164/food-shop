@@ -54,7 +54,7 @@ const Cart = () => {
                           <p className="product-name">{item.listProduct.ten}</p>
                         </td>
                         <td className="text-center">
-                          {convertMoney(item.listProduct.dongia)}₫
+                          {convertMoney(item.listProduct.dongia)}
                         </td>
                         <td>
                           <div className="product-quantity">
@@ -72,7 +72,7 @@ const Cart = () => {
                           </div>
                         </td>
                         <td className="text-center">
-                          {convertMoney(item.listProduct.dongia * item.quantity)}₫
+                          {convertMoney(item.listProduct.dongia * item.quantity)}
                         </td>
                       </tr>
                     )
@@ -84,15 +84,15 @@ const Cart = () => {
                 <tr className="cart-total">
                   <td rowSpan={3} colSpan={3} />
                   <td colSpan={2} className="text-right">Tổng tiền</td>
-                  <td colSpan={1} className="text-center">{totalMoney(listItemCart)}₫</td>
+                  <td colSpan={1} className="text-center">{totalMoney(listItemCart)}</td>
                 </tr>
                 <tr className="cart-total">
                   <td colSpan={2} className="text-right">Phí vận chuyển</td>
-                  <td colSpan={1} className="text-center">0₫</td>
+                  <td colSpan={1} className="text-center">0</td>
                 </tr>
                 <tr className="cart-total">
                   <td colSpan={2} className="total text-right">Tổng</td>
-                  <td colSpan={1} className="total text-center">{totalMoney(listItemCart)}₫</td>
+                  <td colSpan={1} className="total text-center">{totalMoney(listItemCart)}</td>
                 </tr>
               </tfoot>
             </table>

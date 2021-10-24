@@ -1,6 +1,22 @@
 import React from 'react';
+import convertMoney from '../convertMoney'
+import { useSelector } from 'react-redux'
 
 const Checkout = () => {
+  let currentUser = useSelector(state => state.user.currentUser)
+  const listItemCart = useSelector(state => state.cart)
+
+  const totalMoney = (cart) => {
+    const result = []
+
+    cart.map(item => {
+      const total = item.quantity * item.listProduct.dongia
+      result.push(total)
+      return true
+    })
+    return convertMoney(result.reduce((a, b) => a + b, 0))
+  }
+
   return (
     <>
       <div className="container">
@@ -21,45 +37,31 @@ const Checkout = () => {
                       <form action="#" id="formaddress" method="post" className="form-horizontal">
                         <div className="form-group">
                           <div className="col-md-12">
-                            <label>Country</label>
-                            <select className="form-control">
-                              <option value>Select a country</option>
-                              <option value="australia">Australia</option>
-                              <option value="brazil">Brazil</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div className="form-group">
-                          <div className="col-md-6">
-                            <label>First Name</label>
-                            <input type="text" defaultValue className="form-control" />
-                          </div>
-                          <div className="col-md-6">
-                            <label>Last Name</label>
-                            <input type="text" defaultValue className="form-control" />
+                            <label>Địa chỉ</label>
+                            <input type="text" defaultValue={currentUser[0]?.diachi} className="form-control" />
                           </div>
                         </div>
                         <div className="form-group">
                           <div className="col-md-12">
-                            <label>Company Name</label>
-                            <input type="text" defaultValue className="form-control" />
+                            <label>Họ và tên</label>
+                            <input type="text" defaultValue={currentUser[0]?.ten} className="form-control" />
                           </div>
                         </div>
                         <div className="form-group">
                           <div className="col-md-12">
-                            <label>Address </label>
-                            <input type="text" defaultValue className="form-control" />
+                            <label>Email:</label>
+                            <input type="text" defaultValue={currentUser[0]?.email} className="form-control" />
                           </div>
                         </div>
                         <div className="form-group">
                           <div className="col-md-12">
-                            <label>City </label>
-                            <input type="text" defaultValue className="form-control" />
+                            <label>Số điện thoại </label>
+                            <input type="text" defaultValue={currentUser[0]?.sdt} className="form-control" />
                           </div>
                         </div>
                         <div className="form-group">
                           <div className="col-md-12">
-                            <input type="submit" defaultValue="Save" className="btn pull-right" />
+                            <input type="submit" value={'Lưu' || ''} className="btn pull-right" />
                           </div>
                         </div>
                       </form>
@@ -80,52 +82,40 @@ const Checkout = () => {
                       <table className="cart-summary table table-bordered">
                         <thead>
                           <tr>
-                            <th className="width-80 text-center">Image</th>
-                            <th>Name</th>
-                            <th className="width-100 text-center">Unit price</th>
-                            <th className="width-100 text-center">Qty</th>
-                            <th className="width-100 text-center">Total</th>
+                            <th className="width-80 text-center">Hình ảnh</th>
+                            <th>Tên sản phẩm</th>
+                            <th className="width-100 text-center">Đơn giá</th>
+                            <th className="width-100 text-center">Số lượng</th>
+                            <th className="width-100 text-center">Tổng</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>
-                              <a href="product-detail-left-sidebar.html">
-                                <img width={80} alt="Product_Image" className="img-responsive" src="img/product/19.jpg" />
-                              </a>
-                            </td>
-                            <td>
-                              <a href="product-detail-left-sidebar.html" className="product-name">Organic Strawberry Fruits</a>
-                            </td>
-                            <td className="text-center">
-                              $265
-                            </td>
-                            <td className="text-center">
-                              1
-                            </td>
-                            <td className="text-center">
-                              $265
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <a href="product-detail-left-sidebar.html">
-                                <img width={80} alt="Product_Image" className="img-responsive" src="img/product/31.jpg" />
-                              </a>
-                            </td>
-                            <td>
-                              <a href="product-detail-left-sidebar.html" className="product-name">Organic Strawberry Fruits</a>
-                            </td>
-                            <td className="text-center">
-                              $150
-                            </td>
-                            <td className="text-center">
-                              2
-                            </td>
-                            <td className="text-center">
-                              $300
-                            </td>
-                          </tr>
+                          {
+                            listItemCart.map((item, index) => {
+                              return (
+                                <tr key={index}>
+                                  <td>
+                                    <a href="product-detail-left-sidebar.html">
+                                      <img width={80} alt="Product_Image" className="img-responsive" src={process.env.REACT_APP_URL + item.listProduct.anh} />
+                                    </a>
+                                  </td>
+                                  <td>
+                                    <a href="product-detail-left-sidebar.html" className="product-name">{item.listProduct.ten}</a>
+                                  </td>
+                                  <td className="text-center">
+                                    {convertMoney(item.listProduct.dongia)}
+                                  </td>
+                                  <td className="text-center">
+                                    {item.quantity}
+                                  </td>
+                                  <td className="text-center">
+                                    {convertMoney(item.listProduct.dongia * item.quantity)}
+                                  </td>
+                                </tr>
+                              )
+                            })
+                          }
+
                         </tbody>
                       </table>
                       <h4 className="heading-primary">Tổng cộng</h4>
@@ -144,7 +134,7 @@ const Checkout = () => {
                               <strong>Tổng tiền</strong>
                             </th>
                             <td className="total">
-                              $431
+                              {totalMoney(listItemCart)}
                             </td>
                           </tr>
                         </tbody>
@@ -155,7 +145,7 @@ const Checkout = () => {
                 </div>
               </div>
               <div className="pull-right">
-                <button type="submit"  name="proceed" className="btn btn-primary">Thanh toán</button>
+                <button type="submit" name="proceed" className="btn btn-primary">Thanh toán</button>
               </div>
             </div>
             <div className="checkout-right col-lg-3 col-md-3 col-sm-3 col-xs-12">
@@ -176,7 +166,7 @@ const Checkout = () => {
                       <strong>Tổng cộng</strong>
                     </th>
                     <td>
-                      <strong><span className="amount">$431</span></strong>
+                      <strong><span className="amount">{totalMoney(listItemCart)}</span></strong>
                     </td>
                   </tr>
                 </tbody>

@@ -9,6 +9,7 @@ const SignInPage = lazy(() => import('./pages/SignInPage/SignInPage'));
 const SignUpPage = lazy(() => import('./pages/SignUpPage/SignUpPage'));
 const ProductDetailPage = lazy(() => import('./pages/ProductPage/ProductDetailPage'));
 const AboutPage = lazy(() => import('./pages/AboutPage/AboutPage'));
+const ProfilePage = lazy(() => import('./pages/ProfilePage/ProfilePage'));
 
 export const routers = [
   { path: '/', exact: true, Component: HomePage },
@@ -21,5 +22,6 @@ export const routers = [
   { path: '/checkout', exact: true, Component: CheckoutPage },
   { path: '/product/:id', exact: true, Component: ProductDetailPage },
   { path: '/about-us', exact: true, Component: AboutPage },
+  { path: '/profile', exact: true, Component: ProfilePage },
   { path: '*', exact: true, Component: NotFoundPage },
 ]

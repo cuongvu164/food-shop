@@ -3,11 +3,13 @@ import './header.scss'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { logoutUserRequest } from '../../redux/actions/user'
-import  convertMoney  from '../ConvertMoney'
+import convertMoney from '../convertMoney'
 
 const Header = () => {
   const dispatch = useDispatch()
   let cart = useSelector(state => state.cart)
+  let user = useSelector(state => state.user)
+  console.log("🚀 ~ file: Header.js ~ line 12 ~ Header ~ userCurrent", user.isLogin)
   console.log('cartFood------', cart)
 
   const setLogout = () => {
@@ -100,7 +102,7 @@ const Header = () => {
                       <tfoot>
                         <tr className="total">
                           <td>Tổng:</td>
-                          <td colSpan={2}>{totalMoney(cart)}₫</td>
+                          <td colSpan={2}>{totalMoney(cart)}</td>
                         </tr>
                       </tfoot>
                     </table>
@@ -115,18 +117,29 @@ const Header = () => {
                   <i className="zmdi zmdi-menu" style={{ fontSize: '40px' }} />
                 </div>
                 <div className="dropdown-menu" style={{ zIndex: 999 }}>
-                  <div className="item">
-                    <Link to="/profile" title="Log in to your customer account"><i className="fa fa-cog" />My Account</Link>
-                  </div>
-                  <div className="item">
-                    <Link to="/login" title="Log in to your customer account"><i className="fa fa-sign-in" />Login</Link>
-                  </div>
-                  <div className="item">
-                    <Link to="/register" title="Register Account"><i className="fa fa-user" />Register</Link>
-                  </div>
-                  <div className="item">
-                    <Link to="/" title="Register Account" onClick={() => setLogout()}><i className="fa fa-sign-out" />Sign Out</Link>
-                  </div>
+                  {
+                    user?.isLogin ?
+                      <div className="item">
+                        <div className="item">
+                          <Link to="/profile" title="Log in to your customer account"><i className="fa fa-cog" />Welcome {user?.currentUser[0].ten}</Link>
+                        </div>
+                        <div className="item">
+                          <Link to="/" title="Register Account" onClick={() => setLogout()}><i className="fa fa-sign-out" />Sign Out</Link>
+                        </div>
+                      </div>
+                      : <div className="item">
+                        <div className="item">
+                          <Link to="/login" title="Log in to your customer account"><i className="fa fa-sign-in" />Login</Link>
+                        </div>
+                        <div className="item">
+                          <Link to="/register" title="Register Account"><i className="fa fa-user" />Register</Link>
+                        </div>
+                      </div>
+
+                  }
+
+
+
                 </div>
               </div>
             </div>
