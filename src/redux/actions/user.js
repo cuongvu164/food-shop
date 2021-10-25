@@ -1,5 +1,5 @@
 import callAPI from '../../callAPI/callAPI'
-import { REGISTER_USER, LOGIN_USER, GET_USER, LOGOUT_USER, GET_ALL_USER, GET_ALL_ORDER, ADD_ORDER } from '../actionTypes'
+import { REGISTER_USER, LOGIN_USER, GET_USER, LOGOUT_USER, GET_ALL_USER, EDIT_USER } from '../actionTypes'
 import { message } from 'antd';
 
 const key = 'updatable'
@@ -35,7 +35,7 @@ export const getUserByEmail = email => {
 
 export const getUserByEmailResult = email => {
   return dispatch => {
-    return callAPI(`User?Email=${email}`, 'GET', null)
+    return callAPI(`user/email/${email}`, 'GET', null)
       .then(response => {
         dispatch(getUserByEmail(response))
       })
@@ -79,40 +79,30 @@ export const loginUserAPI = user => {
 
 export const logoutUserRequest = () => {
   return {
-      type: LOGOUT_USER
+    type: LOGOUT_USER
   }
 }
 
-//Oder
-export const getAllOrder = payload => {
+// Edit information user
+export const editUserRequest = user => {
   return {
-    type: GET_ALL_ORDER,
-    payload
+    type: EDIT_USER,
+    user
   }
 }
 
-export const getAllOrderResult = () => {
+export const editUserAPI = (id, user) => {
   return dispatch => {
-    return callAPI(`bill`, 'GET', null)
+    return callAPI(`user/${id}?${user}`, 'PUT', user)
       .then(response => {
-        dispatch(getAllOrder(response))
+        dispatch(editUserRequest(response))
+      }).catch(error => {
+        message.loading({ content: 'Đang xử lý...', key })
+
+        setTimeout(() => {
+          message.error({ content: 'Đã lưu !', key, duration: 2 })
+        }, 1000);
       })
   }
 }
 
-//Add order
-export const userOrder = payload => {
-  return {
-    type: ADD_ORDER,
-    payload
-  }
-}
-
-export const userOrderAPI = order => {
-  return dispatch => {
-    return callAPI('bill-detail', 'POST', order)
-      .then(response => {
-        dispatch(userOrder(response))
-      })
-  }
-}
