@@ -19,8 +19,12 @@ export const LOGIN_USER = "LOGIN_USER"
 export const LOGOUT_USER = "LOGOUT_USER"
 export const GET_USER = "GET_USER"
 export const GET_ALL_USER = "GET_ALL_USER"
+export const EDIT_USER = "EDIT_USER"
 
 //Oder
-export const ADD_ORDER = 'ADD_ORDER'
-export const GET_ALL_ORDER = "GET_ALL_ORDER"
 export const ADD_BILL = 'ADD_BILL'
+export const GET_ALL_BILL = 'GET_ALL_BILL'
+export const GET_BILL_BY_CUSTOMER = 'GET_BILL_BY_CUSTOMER'
+export const ADD_BILL_DETAIL = 'ADD_BILL_DETAIL'
+export const GET_ALL_BILL_DETAIL = "GET_ALL_BILL_DETAIL"
+export const GET_BILL_DETAIL_BY_ID_BILL = "GET_BILL_DETAIL_BY_ID_BILL"
