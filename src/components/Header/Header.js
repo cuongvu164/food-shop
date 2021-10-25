@@ -1,16 +1,20 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './header.scss'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { logoutUserRequest } from '../../redux/actions/user'
+import { logoutUserRequest, getUserByEmailResult } from '../../redux/actions/user'
 import convertMoney from '../convertMoney'
 
 const Header = () => {
   const dispatch = useDispatch()
   let cart = useSelector(state => state.cart)
   let user = useSelector(state => state.user)
-  console.log("🚀 ~ file: Header.js ~ line 12 ~ Header ~ userCurrent", user.isLogin)
+  console.log("🚀 ~ file: Header.js ~ line 12 ~ Header ~ userCurrent", user.currentUser.email)
   console.log('cartFood------', cart)
+
+  useEffect(() => {
+    dispatch(getUserByEmailResult(user.currentUser.email))
+  }, [dispatch])
 
   const setLogout = () => {
     dispatch(logoutUserRequest())
@@ -121,7 +125,7 @@ const Header = () => {
                     user?.isLogin ?
                       <div className="item">
                         <div className="item">
-                          <Link to="/profile" title="Log in to your customer account"><i className="fa fa-cog" />Welcome {user?.currentUser[0].ten}</Link>
+                          <Link to="/profile" title="Log in to your customer account"><i className="fa fa-cog" />Welcome {user?.currentUser[0]?.ten}</Link>
                         </div>
                         <div className="item">
                           <Link to="/" title="Register Account" onClick={() => setLogout()}><i className="fa fa-sign-out" />Sign Out</Link>

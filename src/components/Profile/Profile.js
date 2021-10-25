@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useEffect} from 'react';
 import { Tabs } from 'antd';
 import 'antd/dist/antd.css'
 import { useSelector } from 'react-redux'
@@ -6,8 +6,12 @@ import { useSelector } from 'react-redux'
 const { TabPane } = Tabs;
 
 const Profile = () => {
-  const user = useSelector(state => state.user.currentUser)
-  console.log('user------', user)
+  let user = useSelector(state => state.user.currentUser)
+  console.log('user------profile', user)
+
+  useEffect(() => {
+
+  },[])
 
   return (
     <div className="container">

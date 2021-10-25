@@ -1,10 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import convertMoney from '../convertMoney'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { editUserAPI } from '../../redux/actions/user'
+import { useHistory } from 'react-router-dom'
 
 const Checkout = () => {
-  let currentUser = useSelector(state => state.user.currentUser)
+  const dispatch = useDispatch()
+  const history = useHistory()
+  var currentUser = useSelector(state => state.user.currentUser)
   const listItemCart = useSelector(state => state.cart)
+
+  const handleEditUser = event => {
+    const diachi = document.formAddress.address.value
+    const ten = document.formAddress.name.value
+    const sdt = document.formAddress.phoneNumber.value
+    const formData = {
+      diachi,
+      ten,
+      sdt
+    }
+    console.log('event', formData)
+    // currentUser[0]?.id
+    dispatch(editUserAPI(7, formData))
+    setTimeout(() => {
+      history.go(0)
+    }, 500)
+    event.preventDefault()
+  }
 
   const totalMoney = (cart) => {
     const result = []
@@ -34,29 +56,29 @@ const Checkout = () => {
                   </div>
                   <div id="collapseOne" className="accordion-body collapse" style={{ height: 0 }}>
                     <div className="panel-body">
-                      <form action="#" id="formaddress" method="post" className="form-horizontal">
+                      <form name="formAddress" id="formAddress" className="form-horizontal" onSubmit={(event) => handleEditUser(event)}>
                         <div className="form-group">
                           <div className="col-md-12">
                             <label>Địa chỉ</label>
-                            <input type="text" defaultValue={currentUser[0]?.diachi} className="form-control" />
+                            <input type="text" defaultValue={currentUser[0]?.diachi} className="form-control" name="address" />
                           </div>
                         </div>
                         <div className="form-group">
                           <div className="col-md-12">
                             <label>Họ và tên</label>
-                            <input type="text" defaultValue={currentUser[0]?.ten} className="form-control" />
+                            <input type="text" defaultValue={currentUser[0]?.ten} className="form-control" name="name" />
                           </div>
                         </div>
                         <div className="form-group">
                           <div className="col-md-12">
                             <label>Email:</label>
-                            <input type="text" defaultValue={currentUser[0]?.email} className="form-control" />
+                            <input type="text" defaultValue={currentUser[0]?.email} className="form-control" disabled />
                           </div>
                         </div>
                         <div className="form-group">
                           <div className="col-md-12">
                             <label>Số điện thoại </label>
-                            <input type="text" defaultValue={currentUser[0]?.sdt} className="form-control" />
+                            <input type="text" defaultValue={currentUser[0]?.sdt} className="form-control" name="phoneNumber" />
                           </div>
                         </div>
                         <div className="form-group">
@@ -149,7 +171,7 @@ const Checkout = () => {
               </div>
             </div>
             <div className="checkout-right col-lg-3 col-md-3 col-sm-3 col-xs-12">
-              <h4 className="title">Cart Total</h4>
+              <h4 className="title">Tổng Tiền</h4>
               <table className="table cart-total">
                 <tbody>
                   <tr className="shipping">
