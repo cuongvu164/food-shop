@@ -3,12 +3,57 @@ import convertMoney from '../convertMoney'
 import { useDispatch, useSelector } from 'react-redux'
 import { editUserAPI } from '../../redux/actions/user'
 import { useHistory } from 'react-router-dom'
+import { cartComplete } from '../../redux/actions/cart'
+import { userAddBillAPI } from '../../redux/actions/bill'
 
 const Checkout = () => {
   const dispatch = useDispatch()
   const history = useHistory()
   var currentUser = useSelector(state => state.user.currentUser)
+  console.log("🚀 ~ file: Checkout.js ~ line 11 ~ Checkout ~ currentUser", currentUser)
   const listItemCart = useSelector(state => state.cart)
+
+  const timestamp = () => {
+    let date_ob = new Date();
+    let date = ("0" + date_ob.getDate()).slice(-2)
+    let month = ("0" + (date_ob.getMonth() + 1)).slice(-2)
+    let year = date_ob.getFullYear()
+    let hours = date_ob.getHours()
+    let minutes = date_ob.getMinutes()
+    let seconds = date_ob.getSeconds()
+    // console.log(year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds)
+    return year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds
+  }
+
+
+  const totalMoneyFinal = (cart) => {
+    const result = []
+
+    cart.map(item => {
+      const total = item.quantity * item.listProduct.dongia
+      result.push(total)
+      return true
+    })
+    return result.reduce((a, b) => a + b, 0)
+  }
+
+  const handleCheckoutProduct = () => {
+    const timeToday = timestamp()
+    const [idkhachhang, thanhtoan, loaidon, tongtien, idnhanvien, thoigian] = [currentUser[0]?.id, 1, 3, totalMoneyFinal(listItemCart), 1, timeToday]
+    const bill = {
+      idkhachhang,
+      thanhtoan,
+      loaidon,
+      tongtien,
+      idnhanvien,
+      thoigian
+    }
+    console.log("🚀 ~ file: time.js ~ line 30 ~ handleCheckoutProduct ~ bill", timeToday)
+
+
+    dispatch(userAddBillAPI(bill))
+    // dispatch(cartComplete())
+  }
 
   const handleEditUser = event => {
     const diachi = document.formAddress.address.value
@@ -19,12 +64,13 @@ const Checkout = () => {
       ten,
       sdt
     }
-    console.log('event', formData)
+    // console.log('event', formData)
     // currentUser[0]?.id
     dispatch(editUserAPI(7, formData))
-    setTimeout(() => {
-      history.go(0)
-    }, 500)
+    console.log("🚀 ~ file: Checkout.js ~ line 29 ~ Checkout ~ dispatch", dispatch(editUserAPI(7, formData)))
+    // setTimeout(() => {
+    //   history.go(0)
+    // }, 1500)
     event.preventDefault()
   }
 
@@ -167,7 +213,7 @@ const Checkout = () => {
                 </div>
               </div>
               <div className="pull-right">
-                <button type="submit" name="proceed" className="btn btn-primary">Thanh toán</button>
+                <button type="submit" name="proceed" className="btn btn-primary" onClick={() => handleCheckoutProduct()}>Thanh toán</button>
               </div>
             </div>
             <div className="checkout-right col-lg-3 col-md-3 col-sm-3 col-xs-12">
