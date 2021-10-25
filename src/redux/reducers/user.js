@@ -1,4 +1,4 @@
-import { REGISTER_USER, LOGIN_USER, GET_USER, GET_ALL_USER, LOGOUT_USER } from '../actionTypes'
+import { REGISTER_USER, LOGIN_USER, GET_USER, GET_ALL_USER, LOGOUT_USER, EDIT_USER } from '../actionTypes'
 import { message } from 'antd';
 const key = 'updatable';
 
@@ -29,8 +29,8 @@ const userReducer = (state = initialState, action) => {
     case GET_USER:
       return {
         ...state,
-        user: action.email.data,
-        // currentUser: action.user.data
+        // user: action.email.data,
+        currentUser: action.email.data
       }
 
     case REGISTER_USER:
@@ -46,6 +46,18 @@ const userReducer = (state = initialState, action) => {
         user: newUser
       }
 
+    case EDIT_USER:
+      console.log('action Edit currentUser------', state)
+      const editUserLogin = {
+        currentUser: action.user.data,
+        isLogin: true
+      }
+      localStorage.setItem('userLoginFood', JSON.stringify(editUserLogin))
+      return {
+        ...state,
+        currentUser: action.user.data,
+      }
+
     case LOGIN_USER:
       console.log('action currentUser------', state)
       const userLogin = {
@@ -58,7 +70,7 @@ const userReducer = (state = initialState, action) => {
         currentUser: action.user.data,
         isLogin: true
       }
-    
+
     case LOGOUT_USER:
       const userLogout = {
         currentUser: [],
