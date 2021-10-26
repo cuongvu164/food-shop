@@ -1,6 +1,6 @@
 import { GET_ALL_BILL, GET_BILL_BY_CUSTOMER, ADD_BILL, ADD_BILL_DETAIL, GET_ALL_BILL_DETAIL, GET_BILL_DETAIL_BY_ID_BILL } from '../actionTypes'
 import { message } from 'antd';
-const key = 'updatablee';
+const key = 'updatable';
 
 const initialState = {
   bill: [],
@@ -32,7 +32,18 @@ const billReducer = (state = initialState, action) => {
         bill: payload.data
       }
 
-    
+    case ADD_BILL_DETAIL:
+      return {
+        ...state,
+        billDetail: action.payload.data
+      }
+
+    case GET_BILL_DETAIL_BY_ID_BILL:
+      return {
+        ...state,
+        billDetail: action.id.data
+      }
+
 
 
     default: return state

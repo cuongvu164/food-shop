@@ -7,6 +7,7 @@ import {
 import { registerUserAPI, getAllUserResult } from '../../redux/actions/user'
 import { useDispatch, useSelector } from 'react-redux';
 import 'antd/dist/antd.css'
+import md5 from '../md5'
 
 const SignUp = () => {
   const user = useSelector(state => state.user.user)

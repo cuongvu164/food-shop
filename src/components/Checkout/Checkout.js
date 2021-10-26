@@ -4,13 +4,32 @@ import { useDispatch, useSelector } from 'react-redux'
 import { editUserAPI } from '../../redux/actions/user'
 import { useHistory } from 'react-router-dom'
 import { cartComplete } from '../../redux/actions/cart'
-import { userAddBillAPI } from '../../redux/actions/bill'
+import { userAddBillAPI, getAllBillResult, userOrderDetailAPI } from '../../redux/actions/bill'
 
 const Checkout = () => {
   const dispatch = useDispatch()
   const history = useHistory()
+
+  let cartItem = useSelector(state => state.cart)
+
   var currentUser = useSelector(state => state.user.currentUser)
-  console.log("🚀 ~ file: Checkout.js ~ line 11 ~ Checkout ~ currentUser", currentUser)
+
+  let billOfUser = useSelector(state => state.bill.bill)
+
+  const addBillDetails = (billId, cart) => {
+    for (let i = 0; i < cart.length; i++) {
+      let billDetail = {
+        idhoadon: billId,
+        idsanpham: cart[i].listProduct.id,
+        soluong: cart[i].quantity,
+        dongia: cart[i].listProduct.dongia
+      }
+      dispatch(userOrderDetailAPI(billDetail))
+      // console.log('cart', billDetail)
+    }
+  }
+  // addBillDetails(1, cartItem)
+  // console.log("🚀 ~ file: Checkout.js ~ line 11 ~ Checkout ~ currentUser", currentUser)
   const listItemCart = useSelector(state => state.cart)
 
   const timestamp = () => {
@@ -38,9 +57,12 @@ const Checkout = () => {
   }
 
   const handleCheckoutProduct = () => {
-    const timeToday = timestamp()
-    const [idkhachhang, thanhtoan, loaidon, tongtien, idnhanvien, thoigian] = [currentUser[0]?.id, 1, 3, totalMoneyFinal(listItemCart), 1, timeToday]
+    let newIdBill = billOfUser[billOfUser.length - 1]?.id + 1
+    // console.log("billOfUser", newIdBill)
+    let timeToday = timestamp()
+    const [id, idkhachhang, thanhtoan, loaidon, tongtien, idnhanvien, thoigian] = [newIdBill, currentUser[0]?.id, 1, 3, totalMoneyFinal(listItemCart), 1, timeToday]
     const bill = {
+      id,
       idkhachhang,
       thanhtoan,
       loaidon,
@@ -50,8 +72,24 @@ const Checkout = () => {
     }
     console.log("🚀 ~ file: time.js ~ line 30 ~ handleCheckoutProduct ~ bill", timeToday)
 
-
     dispatch(userAddBillAPI(bill))
+    dispatch(getAllBillResult())
+
+    addBillDetails(newIdBill,cartItem)
+
+
+
+    // dispatch(userOrderDetailAPI())
+
+
+    // let filterCustomerId = billOfUser.filter(item => item.idkhachhang == currentUser[0]?.id)
+
+    // setTimeout(() => {
+    //   let filterBillId = filterCustomerId?.filter(item => item?.thoigian === timeToday)
+    //   console.log("filterBill", filterBillId)
+
+    // },2000)
+    // console.log("filterCustomerId", filterCustomerId)
     // dispatch(cartComplete())
   }
 
@@ -66,7 +104,7 @@ const Checkout = () => {
     }
     // console.log('event', formData)
     // currentUser[0]?.id
-    dispatch(editUserAPI(7, formData))
+    dispatch(editUserAPI(currentUser[0]?.id, formData))
     console.log("🚀 ~ file: Checkout.js ~ line 29 ~ Checkout ~ dispatch", dispatch(editUserAPI(7, formData)))
     // setTimeout(() => {
     //   history.go(0)
@@ -84,6 +122,10 @@ const Checkout = () => {
     })
     return convertMoney(result.reduce((a, b) => a + b, 0))
   }
+
+  useEffect(() => {
+    dispatch(getAllBillResult())
+  }, [])
 
   return (
     <>
