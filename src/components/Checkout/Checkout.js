@@ -28,8 +28,7 @@ const Checkout = () => {
       // console.log('cart', billDetail)
     }
   }
-  // addBillDetails(1, cartItem)
-  // console.log("🚀 ~ file: Checkout.js ~ line 11 ~ Checkout ~ currentUser", currentUser)
+
   const listItemCart = useSelector(state => state.cart)
 
   const timestamp = () => {
@@ -73,23 +72,11 @@ const Checkout = () => {
     console.log("🚀 ~ file: time.js ~ line 30 ~ handleCheckoutProduct ~ bill", timeToday)
 
     dispatch(userAddBillAPI(bill))
+
     dispatch(getAllBillResult())
 
     addBillDetails(newIdBill,cartItem)
 
-
-
-    // dispatch(userOrderDetailAPI())
-
-
-    // let filterCustomerId = billOfUser.filter(item => item.idkhachhang == currentUser[0]?.id)
-
-    // setTimeout(() => {
-    //   let filterBillId = filterCustomerId?.filter(item => item?.thoigian === timeToday)
-    //   console.log("filterBill", filterBillId)
-
-    // },2000)
-    // console.log("filterCustomerId", filterCustomerId)
     // dispatch(cartComplete())
   }
 

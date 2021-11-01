@@ -91,11 +91,11 @@ const Header = () => {
                                     {item.quantity} x <span className="product-price">{convertMoney(item.listProduct.dongia)}</span>
                                   </div>
                                 </td>
-                                <td className="action">
+                                {/* <td className="action">
                                   <Link className="remove" to="/">
                                     <i className="fa fa-trash-o" aria-hidden="true" />
                                   </Link>
-                                </td>
+                                </td> */}
                               </tr>
                             )
                           })

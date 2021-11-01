@@ -29,8 +29,8 @@ const userReducer = (state = initialState, action) => {
     case GET_USER:
       return {
         ...state,
-        // user: action.email.data,
-        currentUser: action.email.data
+        user: action.email.data,
+        // currentUser: action.email.data
       }
 
     case REGISTER_USER:

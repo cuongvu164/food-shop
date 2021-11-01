@@ -1,10 +1,11 @@
-import { GET_ALL_BILL, GET_BILL_BY_CUSTOMER, ADD_BILL, ADD_BILL_DETAIL, GET_ALL_BILL_DETAIL, GET_BILL_DETAIL_BY_ID_BILL } from '../actionTypes'
+import { GET_ALL_BILL, GET_BILL_BY_CUSTOMER, ADD_BILL, ADD_BILL_DETAIL, GET_ALL_BILL_DETAIL, GET_BILL_DETAIL_BY_ID_BILL, GET_PURCHASE_HISTORY } from '../actionTypes'
 import { message } from 'antd';
 const key = 'updatable';
 
 const initialState = {
   bill: [],
   billDetail: [],
+  order: []
 }
 
 const billReducer = (state = initialState, action) => {
@@ -37,13 +38,23 @@ const billReducer = (state = initialState, action) => {
         ...state,
         billDetail: action.payload.data
       }
+    case GET_ALL_BILL_DETAIL:
+      return {
+        ...state,
+        billDetail: action.payload.data
+      }
 
     case GET_BILL_DETAIL_BY_ID_BILL:
       return {
         ...state,
-        billDetail: action.id.data
+        order: action.id.data
       }
-
+    
+    case GET_PURCHASE_HISTORY:
+      return {
+        ...state,
+        order: action.payload.data
+      }
 
 
     default: return state

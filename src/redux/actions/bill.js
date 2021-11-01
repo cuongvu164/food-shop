@@ -1,5 +1,5 @@
 import callAPI from '../../callAPI/callAPI'
-import { GET_ALL_BILL, GET_BILL_BY_CUSTOMER, ADD_BILL, ADD_BILL_DETAIL, GET_ALL_BILL_DETAIL, GET_BILL_DETAIL_BY_ID_BILL } from '../actionTypes'
+import { GET_ALL_BILL, GET_BILL_BY_CUSTOMER, ADD_BILL, ADD_BILL_DETAIL, GET_ALL_BILL_DETAIL, GET_BILL_DETAIL_BY_ID_BILL, GET_PURCHASE_HISTORY } from '../actionTypes'
 import { message } from 'antd';
 
 const key = 'updatable'
@@ -106,7 +106,23 @@ export const getBillDetailByCustomerResult = id => {
   return dispatch => {
     return callAPI(`bill-detail/id-bill/${id}`, 'GET', null)
       .then(response => {
-        dispatch(getBillByCustomer(response))
+        dispatch(getBillDetailByCustomer(response))
+      })
+  }
+}
+
+export const getPurchaseHistory = payload => {
+  return {
+    type: GET_PURCHASE_HISTORY,
+    payload
+  }
+}
+
+export const getPurchaseHistoryResult = id => {
+  return dispatch => {
+    return callAPI(`user/history/${id}`, 'GET', null)
+      .then(response => {
+        dispatch(getPurchaseHistory(response))
       })
   }
 }
