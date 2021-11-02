@@ -14,21 +14,12 @@ const Profile = () => {
   console.log("purchaseHistory------", purchaseHistory.id_order)
   // console.log('user------profile', user[0]?.id)
 
-  const totalMoney = (cart) => {
-    const result = []
-
-    cart.map(item => {
-      const total = item.quantity * item.listProduct.dongia
-      result.push(total)
-      return true
-    })
-    return result.reduce((a, b) => a + b, 0)
-  }
   const productDetails = purchaseHistory.id_order
   console.log("🚀 ~ file: Profile.js ~ line 28 ~ Profile ~ productDetails", productDetails)
 
   useEffect(() => {
     dispatch(getPurchaseHistoryResult(user[0]?.id))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

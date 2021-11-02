@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import convertMoney from '../convertMoney'
 import { useDispatch, useSelector } from 'react-redux'
 import { editUserAPI } from '../../redux/actions/user'
@@ -77,7 +77,7 @@ const Checkout = () => {
 
     addBillDetails(newIdBill,cartItem)
 
-    // dispatch(cartComplete())
+    dispatch(cartComplete())
   }
 
   const handleEditUser = event => {

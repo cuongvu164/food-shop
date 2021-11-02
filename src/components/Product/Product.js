@@ -18,6 +18,10 @@ const Product = () => {
   var listProduct = useSelector(state => state.product.products)
   // console.log('listProduct123------', listProduct.current_page)
 
+  const countPageNumber = array => {
+    const count = array?.slice(1,array.length-1)
+    return count?.length
+  }
   // console.log('param', params)
   useEffect(() => {
     if (Object.getOwnPropertyNames(params).length !== 0) {
@@ -173,7 +177,7 @@ const Product = () => {
 
         {/* Pagination Bar */}
         <Pagination
-          total={listProduct.total}
+          total={countPageNumber(listProduct.links)}
           categoryId={params.id}
           next={listProduct.next_page_url}
           prev={listProduct.prev_page_url}
