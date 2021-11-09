@@ -56,16 +56,16 @@ const SignUp = () => {
 
   const onFinish = async (values) => {
     const loaitaikhoan = 1
-    const newData = { ...values, loaitaikhoan }
+    const newData = { ...values, loaitaikhoan, matkhau: md5(values.matkhau) }
     console.log('test newdata', newData)
     let emailUser = user.filter(item => item.email === newData.email)
-    console.log("🚀 ~ file: SignUp.js ~ line 60 ~ onFinish ~ emailUser", emailUser)
+    // console.log("🚀 ~ file: SignUp.js ~ line 60 ~ onFinish ~ emailUser", emailUser)
     // dispatch(getUserByEmailResult(newData.Email))
 
     if (user.length === 0 || emailUser.length === 0) {
       dispatch(registerUserAPI(newData))
       setTimeout(() => {
-        // history.push('/login')
+        history.push('/login')
       }, 3000)
     } else {
       alert('Email đăng kí đã sử dụng. Vui lòng thử lại')
