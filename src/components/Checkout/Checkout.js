@@ -78,6 +78,11 @@ const Checkout = () => {
     addBillDetails(newIdBill,cartItem)
 
     dispatch(cartComplete())
+
+    setTimeout(() => {
+      history.push('/product')
+    },4000)
+    
   }
 
   const handleEditUser = event => {
@@ -112,6 +117,7 @@ const Checkout = () => {
 
   useEffect(() => {
     dispatch(getAllBillResult())
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

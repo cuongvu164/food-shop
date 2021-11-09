@@ -9,11 +9,12 @@ const Header = () => {
   const dispatch = useDispatch()
   let cart = useSelector(state => state.cart)
   let user = useSelector(state => state.user)
-  console.log("🚀 ~ file: Header.js ~ line 12 ~ Header ~ userCurrent", user.currentUser.email)
+  // console.log("🚀 ~ file: Header.js ~ line 12 ~ Header ~ userCurrent", user.currentUser.email)
   console.log('cartFood------', cart)
 
   useEffect(() => {
     dispatch(getUserByEmailResult(user.currentUser.email))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch])
 
   const setLogout = () => {

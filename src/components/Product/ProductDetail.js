@@ -23,6 +23,7 @@ const ProductDetail = () => {
   console.log('productByID------', productByID)
   useEffect(() => {
     dispatch(getProductByIDResult(params.id))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params])
 
   return (

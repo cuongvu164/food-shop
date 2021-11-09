@@ -3,13 +3,18 @@ import './cart.scss'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
 import { updateToCart, deleteToCart } from '../../redux/actions/cart'
-import { useHistory } from 'react-router-dom'
-import  convertMoney  from '../convertMoney'
+import convertMoney from '../convertMoney'
+import { Popconfirm } from 'antd';
+import { QuestionCircleOutlined } from '@ant-design/icons';
+import 'antd/dist/antd.css'
 
 const Cart = () => {
   const dispatch = useDispatch()
   const listItemCart = useSelector(state => state.cart)
-  let history = useHistory()
+
+  const confirm = (id) => {
+    dispatch(deleteToCart(id))
+  }
 
   const totalMoney = (cart) => {
     const result = []
@@ -45,7 +50,15 @@ const Cart = () => {
                     return (
                       <tr key={index}>
                         <td className="product-remove">
-                          <i className="fa fa-times" onClick={() => dispatch(deleteToCart(item.listProduct))}/>
+                          <Popconfirm
+                            title="Chắc chắn muốn xóa ?"
+                            onConfirm={() => confirm(item.listProduct)}
+                            icon={<QuestionCircleOutlined style={{ color: 'red' }}/>}
+                            onVisibleChange={() => console.log('visible change')}
+                          >
+                            <i className="fa fa-times" />
+                          </Popconfirm>
+                          {/* <i className="fa fa-times" onClick={() => dispatch(deleteToCart(item.listProduct))} /> */}
                         </td>
                         <td>
                           <img width={80} alt="Product_Image" className="img-responsive" src={process.env.REACT_APP_URL + item.listProduct.anh} />
@@ -66,7 +79,7 @@ const Cart = () => {
                                   defaultValue={item.quantity}
                                   min={1}
                                   onChange={(e) => dispatch(updateToCart(item.listProduct, parseInt(e.target.value)))}
-                                  />
+                                />
                               </div>
                             </div>
                           </div>

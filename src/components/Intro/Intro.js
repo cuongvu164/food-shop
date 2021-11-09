@@ -3,7 +3,7 @@ import React from 'react';
 const Intro = () => {
   return (
     <>
-      <div className="section intro">
+      <div className="section intro" style={{backgroundColor: 'transparent'}}>
         <div className="container">
           <div className="row">
             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">

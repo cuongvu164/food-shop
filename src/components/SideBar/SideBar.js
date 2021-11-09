@@ -6,7 +6,7 @@ import { getCategoryResult } from '../../redux/actions/category'
 const SideBar = () => {
   const dispatch = useDispatch()
   const listCategory = useSelector(state => state.category.categorys)
-  console.log('listCategory-----', listCategory)
+  // console.log('listCategory-----', listCategory)
 
   const convertArrayByParentID = (arr, id) => {
     const newArrayParent = arr
@@ -17,7 +17,7 @@ const SideBar = () => {
           ...item,
         }
       })
-    console.log(id, newArrayParent);
+    // console.log(id, newArrayParent);
     return newArrayParent
   }
 
@@ -30,7 +30,7 @@ const SideBar = () => {
           ...item,
         }
       })
-    console.log('newArrayChildren-------', newArrayChildren);
+    // console.log('newArrayChildren-------', newArrayChildren);
     return newArrayChildren
   }
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './product.scss'
 import {
   Link,
@@ -9,25 +9,43 @@ import { Markup } from 'interweave';
 import { getProductPaginationResult } from '../../redux/actions/product'
 import { addToCart } from '../../redux/actions/cart'
 import Pagination from '../Pagination/Pagination'
-import  convertMoney  from '../convertMoney'
+import convertMoney from '../convertMoney'
 
 const Product = () => {
   const params = useParams()
   // console.log("🚀 ~ file: Product.js ~ line 15 ~ Product ~ params", params.page)
   const dispatch = useDispatch()
-  var listProduct = useSelector(state => state.product.products)
-  // console.log('listProduct123------', listProduct.current_page)
+  let listProduct = useSelector(state => state.product.products)
+  // console.log('listProduct123------', listProduct.data)
+
+  const [products, setProducts] = useState(listProduct.data)
+
+  const sortByPrice = (e) => {
+    const sort = e.target.value
+    console.log('sortasd', sort)
+    if (sort === 'low') {
+      let sortByPrice = listProduct.data?.sort((a, b) => a.dongia - b.dongia)
+      setProducts(sortByPrice)
+      // return sortByPrice
+    } else if (sort === 'high') {
+      let sortByPrice = listProduct.data?.sort((a, b) => b.dongia - a.dongia)
+      setProducts(sortByPrice)
+      // return sortByPrice
+    }
+  }
 
   const countPageNumber = array => {
-    const count = array?.slice(1,array.length-1)
+    const count = array?.slice(1, array.length - 1)
     return count?.length
   }
   // console.log('param', params)
   useEffect(() => {
     if (Object.getOwnPropertyNames(params).length !== 0) {
       dispatch(getProductPaginationResult(params.id, params.page))
+
     } else {
       dispatch(getProductPaginationResult(1, 1))
+      // setProducts(listProduct.data)
     }
   }, [params, dispatch])
 
@@ -36,6 +54,10 @@ const Product = () => {
       params.id = 1
     }
   }, [params])
+
+  // useEffect(() => {
+  //   setProducts(listProduct.data)
+  // }, [listProduct.data])
 
   return (
     <>
@@ -51,18 +73,15 @@ const Product = () => {
                     <li><Link to="#products-list" data-toggle="tab" aria-expanded="false"><i className="fa fa-bars" /></Link></li>
                   </ul>
                 </div>
-                <div className="total-products">There are 12 products</div>
               </div>
               <div className="col-md-6 col-xs-6">
                 <div className="filter-bar">
                   <form action="#" className="pull-right">
                     <div className="select">
-                      <select className="form-control">
+                      <select className="form-control" onChange={(event) => sortByPrice(event)}>
                         <option value>Sort By</option>
-                        <option value={1}>Price: Lowest first</option>
-                        <option value={2}>Price: Highest first</option>
-                        <option value={3}>Product Name: A to Z</option>
-                        <option value={4}>Product Name: Z to A</option>
+                        <option value="low">Price: Lowest first</option>
+                        <option value="high">Price: Highest first</option>
                       </select>
                     </div>
                   </form>

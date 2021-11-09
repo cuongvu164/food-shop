@@ -30,10 +30,7 @@ const Pagination = (props) => {
     <>
       <div className="pagination-bar">
         <div className="row">
-          <div className="col-md-4 col-sm-4 col-xs-12">
-            <div className="text">Showing 1-12 of 20 item(s)</div>
-          </div>
-          <div className="col-md-8 col-sm-8 col-xs-12">
+          <div className="col-md-12 col-sm-12 col-xs-12">
             <div className="pagination">
               <ul className="page-list">
                 <li >
@@ -47,7 +44,7 @@ const Pagination = (props) => {
                 </li>
                 {
                   pageNumber.map((item, index) => {
-                    console.log('pagination--------2', pagination)
+                    // console.log('pagination--------2', pagination)
                     return (
                       <li key={index}>
                         <Link
