@@ -1,5 +1,5 @@
 import callAPI from '../../callAPI/callAPI'
-import { GET_ALL_PRODUCT, GET_PRODUCT_CATEGORY_ID, GET_PRODUCT_ID, GET_PRODUCT_PAGINATION } from '../actionTypes'
+import { GET_ALL_PRODUCT, GET_PRODUCT_CATEGORY_ID, GET_PRODUCT_ID, GET_PRODUCT_PAGINATION, SEARCH_PRODUCTS } from '../actionTypes'
 
 export const getProduct = payload => {
   return {
@@ -61,6 +61,22 @@ export const getProductPaginationResult = (id, pageNumber) => {
     return callAPI(`product/category/${id}?page=${pageNumber}`, 'GET', null)
       .then(response => {
         dispatch(getProductPagination(response))
+      })
+  }
+}
+
+export const getProductByKeyword = payload => {
+  return {
+    type: SEARCH_PRODUCTS,
+    payload
+  }
+}
+
+export const getProductByKeywordResult = (keyword,pageNumber) => {
+  return dispatch => {
+    return callAPI(`product/search/${keyword}?page=${pageNumber}`, 'GET', null)
+      .then(response => {
+        dispatch(getProductByKeyword(response))
       })
   }
 }
