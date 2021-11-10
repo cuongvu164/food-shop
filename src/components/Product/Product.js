@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { Markup } from 'interweave';
-import { getProductPaginationResult } from '../../redux/actions/product'
+import { getProductPaginationResult, getProductByKeywordResult } from '../../redux/actions/product'
 import { addToCart } from '../../redux/actions/cart'
 import Pagination from '../Pagination/Pagination'
 import convertMoney from '../convertMoney'
@@ -38,22 +38,36 @@ const Product = () => {
     const count = array?.slice(1, array.length - 1)
     return count?.length
   }
-  // console.log('param', params)
+  console.log('param id', params.id)
   useEffect(() => {
-    if (Object.getOwnPropertyNames(params).length !== 0) {
+    if (params.id > 0) {
       dispatch(getProductPaginationResult(params.id, params.page))
-
-    } else {
-      dispatch(getProductPaginationResult(1, 1))
-      // setProducts(listProduct.data)
     }
-  }, [params, dispatch])
+    if (params?.keyword != '') {
+      dispatch(getProductByKeywordResult(params.keyword, params.page))
+    }
+    // else {
+    //   dispatch(getProductPaginationResult(1, 1))
+    //   // setProducts(listProduct.data)
+    // }
+    // if (params.keyword !== '') {
+    //   dispatch(getProductByKeywordResult(params.keyword))
+    // }
+  }, [params.id, params.keyword, params])
 
   useEffect(() => {
-    if (!params.id) {
-      params.id = 1
+    if (!params.id && params.keyword == undefined) {
+      // params.id = 1
+      dispatch(getProductPaginationResult(1, 1))
     }
-  }, [params])
+    if (params.id > 0) {
+      dispatch(getProductPaginationResult(params.id, params.page))
+    }
+  }, [params.id])
+
+  // useEffect(() => {
+  //   dispatch(getProductPaginationResult(1, 1))
+  // },[])
 
   // useEffect(() => {
   //   setProducts(listProduct.data)
@@ -201,6 +215,7 @@ const Product = () => {
           next={listProduct.next_page_url}
           prev={listProduct.prev_page_url}
           currentPage={params.page}
+          keyword={params.keyword}
         />
 
       </div>

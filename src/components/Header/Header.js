@@ -1,21 +1,31 @@
-import React, {useEffect} from 'react';
+import React, { useEffect, useState } from 'react';
 import './header.scss'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { logoutUserRequest, getUserByEmailResult } from '../../redux/actions/user'
+import { getProductByKeywordResult } from '../../redux/actions/product'
 import convertMoney from '../convertMoney'
 
 const Header = () => {
+  const [keyword, setKeyword] = useState('')
   const dispatch = useDispatch()
+  const history = useHistory()
   let cart = useSelector(state => state.cart)
   let user = useSelector(state => state.user)
   // console.log("🚀 ~ file: Header.js ~ line 12 ~ Header ~ userCurrent", user.currentUser.email)
-  console.log('cartFood------', cart)
+  // console.log('cartFood------', cart)
 
   useEffect(() => {
     dispatch(getUserByEmailResult(user.currentUser.email))
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch])
+
+  const handleSearch = (event) => {
+    event.preventDefault()
+    console.log('handleSearch', keyword)
+    // dispatch(getProductByKeywordResult(keyword))
+    history.push(`/product/search/${keyword}/page=1`)
+  }
 
   const setLogout = () => {
     dispatch(logoutUserRequest())
@@ -46,8 +56,15 @@ const Header = () => {
             {/* Search */}
             <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
               <div className="form-search">
-                <form action="#" method="get">
-                  <input type="text" className="form-input" placeholder="Search" />
+                <form action="#" method="get" onSubmit={(event) => handleSearch(event)}>
+                  <input
+                    type="text"
+                    className="form-input"
+                    placeholder="Search"
+                    style={{ textTransform: 'inherit' }}
+                    defaultValue={keyword}
+                    onChange={(e) => setKeyword(e.target.value)}
+                  />
                   <button type="submit" className="fa fa-search" />
                 </form>
               </div>
