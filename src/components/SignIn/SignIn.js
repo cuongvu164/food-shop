@@ -63,7 +63,7 @@ const SignIn = () => {
     const newData = { ...values }
     console.log('test newdata', newData.email)
     let emailUser = user.filter(item => item.email === newData.email)
-    let passwordUser = user.filter(item => md5(item.matkhau) === md5(newData.password))
+    let passwordUser = user.filter(item => md5(item.password) === md5(newData.password))
     // dispatch(getUserByEmailResult(newData.Email))
 
     if (emailUser.length !== 0 && passwordUser.length !== 0) {

@@ -56,7 +56,7 @@ const SignUp = () => {
 
   const onFinish = async (values) => {
     const loaitaikhoan = 1
-    const newData = { ...values, loaitaikhoan, matkhau: md5(values.matkhau) }
+    const newData = { ...values, loaitaikhoan, password: md5(values.password) }
     console.log('test newdata', newData)
     let emailUser = user.filter(item => item.email === newData.email)
     // console.log("🚀 ~ file: SignUp.js ~ line 60 ~ onFinish ~ emailUser", emailUser)
@@ -121,7 +121,7 @@ const SignUp = () => {
         </Form.Item>
 
         <Form.Item {...tailLayout}
-          name="matkhau"
+          name="password"
           rules={[
             {
               required: true,
