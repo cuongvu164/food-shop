@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {
-  useParams
+  useParams,
+  useHistory
 } from 'react-router-dom'
 import { Markup } from 'interweave';
 import { useDispatch, useSelector } from 'react-redux'
@@ -10,14 +11,21 @@ import  convertMoney  from '../convertMoney'
 
 const ProductDetail = () => {
   const productByID = useSelector(state => state.product.productByID)
+  let user = useSelector(state => state.user)
   const params = useParams()
+  const history = useHistory()
   const dispatch = useDispatch()
 
   const [amount, setAmount] = useState(1)
 
   const handleAddToCart = () => {
-    console.log('test amount form',)
-    dispatch(addToCart(productByID, parseInt(amount)))
+    // console.log('test amount form',)
+    if (user?.isLogin) {
+      dispatch(addToCart(productByID, parseInt(amount)))
+    } else {
+      alert('Bạn cần phải đăng nhập')
+     history.push('/login')
+    }
   }
 
   console.log('productByID------', productByID)

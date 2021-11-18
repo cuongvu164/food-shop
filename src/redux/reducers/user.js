@@ -77,6 +77,7 @@ const userReducer = (state = initialState, action) => {
         isLogin: false
       }
       localStorage.setItem('userLoginFood', JSON.stringify(userLogout))
+      localStorage.removeItem('cartFood')
       return {
         ...state,
         currentUser: [],

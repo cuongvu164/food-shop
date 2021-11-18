@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import './product.scss'
 import {
   Link,
-  useParams
+  useParams,
+  useHistory
 } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { Markup } from 'interweave';
@@ -13,12 +14,23 @@ import convertMoney from '../convertMoney'
 
 const Product = () => {
   const params = useParams()
+  const history = useHistory()
   // console.log("🚀 ~ file: Product.js ~ line 15 ~ Product ~ params", params.page)
   const dispatch = useDispatch()
+  let user = useSelector(state => state.user)
   let listProduct = useSelector(state => state.product.products)
   // console.log('listProduct123------', listProduct.data)
 
   const [products, setProducts] = useState(listProduct.data)
+
+  const addProductToCart = (item) => {
+    if (user?.isLogin) {
+      dispatch(addToCart(item,1))
+    } else {
+      alert('Bạn cần phải đăng nhập')
+     history.push('/login')
+    }
+  }
 
   const sortByPrice = (e) => {
     const sort = e.target.value
@@ -43,7 +55,7 @@ const Product = () => {
     if (params.id > 0) {
       dispatch(getProductPaginationResult(params.id, params.page))
     }
-    if (params?.keyword != '') {
+    if (params?.keyword != undefined) {
       dispatch(getProductByKeywordResult(params.keyword, params.page))
     }
     // else {
@@ -136,7 +148,7 @@ const Product = () => {
                               <span className="sale-price">{convertMoney(item.dongia)}</span>
                             </div>
                             <div className="product-buttons">
-                              <div className="add-to-cart" onClick={() => dispatch(addToCart(item, 1))}>
+                              <div className="add-to-cart" onClick={() => addProductToCart(item)}>
                                 {/* chu y */}
                                 <i className="fa fa-shopping-basket" aria-hidden="true" />
                               </div>
