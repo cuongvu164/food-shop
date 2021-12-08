@@ -63,10 +63,12 @@ const SignIn = () => {
     const newData = { ...values }
     console.log('test newdata', newData.email)
     let emailUser = user.filter(item => item.email === newData.email)
-    let passwordUser = user.filter(item => md5(item.password) === md5(newData.password))
+    // let passwordUser = user.filter(item => md5(item.password) === md5(newData.password))
     // dispatch(getUserByEmailResult(newData.Email))
+    // console.log('md5(newData.password)',md5(newData.password))
+    // console.log('emailUser.password',emailUser)
 
-    if (emailUser.length !== 0 && passwordUser.length !== 0) {
+    if (emailUser.length !== 0 && emailUser[0].password === md5(newData.password)) {
       dispatch(loginUserAPI(newData.email))
       // const userLocal = { email: newData.Email, isLogin: true }
       // localStorage.setItem('userLogin', JSON.stringify(userLocal))
